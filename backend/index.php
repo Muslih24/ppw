@@ -36,8 +36,9 @@ $user = query("SELECT * FROM user");
 			<td><?= $row["no_hp"]  ?></td>
 			<td><?= $row["email"]  ?></td>
 			<td>
-				<a href="">Edit</a> |
-				<a href="">Delete</a>
+				<a href="tambah.php">Tambah</a> |
+				<a href="edit.php">Edit</a> |
+				<a href="del.php">Delete</a> 
 			</td>
 		</tr>
 	<?php $i++; ?>
