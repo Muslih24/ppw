@@ -1,4 +1,4 @@
-<?php 
+<?php
 $conn = mysqli_connect("localhost", "root", "", "db_wisata");
 
 //cek submit
@@ -42,9 +42,9 @@ if (isset($_POST["submit"]) ) {
 		<li>
 			<label for="hak_akses">Hak Akses :</label>
 			<br/>
-			SU<input type="radio" value="superadmin" name="hak_akses" id="hak_akses">
-			Admin<input type="radio" value="admin" name="hak_akses" id="hak_akses">
-			Admin Lokasi<input type="radio" value="adminlokasi" name="hak_akses" id="hak_akses">
+			<input type="radio" value="superadmin" name="hak_akses" id="hak_akses">SU <br>
+			<input type="radio" value="admin" name="hak_akses" id="hak_akses">Admin <br>
+			<input type="radio" value="adminlokasi" name="hak_akses" id="hak_akses">Admin Lokasi
 		</li>
 		<li>
 			<label for="nama">Nama :</label>
@@ -53,8 +53,8 @@ if (isset($_POST["submit"]) ) {
 		<li>
 			<label for="jk">Jenis Kelamin :</label>
 			<br/>
-			Laki-laki<input type="radio" value="laki-laki" name="jk" id="jk">
-			Perempuan<input type="radio" value="perempuan" name="jk" id="jk">
+			<input type="radio" value="laki-laki" name="jk" id="jk">Laki-laki <br>
+			<input type="radio" value="perempuan" name="jk" id="jk">Perempuan
 		</li>
 		<li>
 			<label for="tanggal_lahir">Tanggal Lahir :</label>
