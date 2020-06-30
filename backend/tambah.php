@@ -1,30 +1,31 @@
 <?php 
-$conn = mysqli_connect("localhost", "root", "", "db_wisata");
+require 'functions.php';
 
 //cek submit
 if (isset($_POST["submit"]) ) {
-	//ambil data
-	$username = $_POST["username"];
-	$password = $_POST["password"];
-	$hak_akses = $_POST["hak_akses"];
-	$nama = $_POST["nama"];
-	$jk = $_POST["jk"];
-	$tanggal_lahir = $_POST["tanggal_lahir"];
-	$alamat = $_POST["alamat"];
-	$no_hp = $_POST["no_hp"];
-	$email = $_POST["email"];
+	//cek keberhasilan
+	if (tambah($_POST) > 0 ) {
+		echo "
+			<script>
+				alert('Successed To Input');
+				document.location.href = 'index.php';
+			</script>
+		";
+	}else{
+		echo "
+			<script>
+				alert('Failed To Input');
+				document.location.href = 'index.php';
+			</script>
+		";
+	}
 
-	$query = "INSERT INTO db_wisata
-			VALUES
-			('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
-				";
-	mysqli_query($conn, $query);
 }
  ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Tambah Data Mahasiswa</title>
+	<title>Tambah Data User</title>
 </head>
 <body>
 
@@ -33,44 +34,48 @@ if (isset($_POST["submit"]) ) {
 	<ul>
 		<li>
 			<label for="username">Username :</label>
-			<input type="varchar" name="username" id="username">
+			<input type="varchar" name="username" id="username" required>
 		</li>
 		<li>
 			<label for="password">Password :</label>
-			<input type="varchar" name="password" id="password">
+			<input type="varchar" name="password" id="password" required>
 		</li>
-		<li>
+		<li class="form-group">
 			<label for="hak_akses">Hak Akses :</label>
-			<br/>
-			SU<input type="radio" value="superadmin" name="hak_akses" id="hak_akses">
-			Admin<input type="radio" value="admin" name="hak_akses" id="hak_akses">
-			Admin Lokasi<input type="radio" value="adminlokasi" name="hak_akses" id="hak_akses">
+			<select class="form-control" name="hak_akses" id="hak_akses" required>	
+			<option value="">Pilih</option>
+			<option value="superadmin">SU</option>
+			<option value="admin">admin</option>
+			<option value="adminlokasi">adminlokasi</option>
+			</select>
 		</li>
 		<li>
 			<label for="nama">Nama :</label>
-			<input type="varchar" name="nama" id="nama">
+			<input type="varchar" name="nama" id="nama" required>
 		</li>
-		<li>
+		<li class="form-group">
 			<label for="jk">Jenis Kelamin :</label>
-			<br/>
-			Laki-laki<input type="radio" value="laki-laki" name="jk" id="jk">
-			Perempuan<input type="radio" value="perempuan" name="jk" id="jk">
+			<select class="form-control" name="jk" id="jk" required>
+				<option value="">Pilih</option>
+				<option value="laki-laki">Laki-laki</option>
+				<option value="perempuan">Perempuan</option>
+			</select>
 		</li>
 		<li>
 			<label for="tanggal_lahir">Tanggal Lahir :</label>
-			<input type="date" name="tanggal_lahir" id="tanggal_lahir">
+			<input type="date" name="tanggal_lahir" id="tanggal_lahir" required>
 		</li>
 		<li>
 			<label for="alamat">Alamat :</label>
-			<input type="text" name="alamat">
+			<input type="text" name="alamat" required>
 		</li>
 		<li>
 			<label for="no_hp">No Hp :</label>
-			<input type="varchar" name="no_hp" id="no_hp">
+			<input type="varchar" name="no_hp" id="no_hp" required>
 		</li>
 		<li>
 			<label for="email">Email :</label>
-			<input type="varchar" name="email" id="email">
+			<input type="varchar" name="email" id="email" required>
 		</li>
 		<li>
 			<button type="submit" name="submit">Simpan Data</button>
