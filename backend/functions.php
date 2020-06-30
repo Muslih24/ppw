@@ -9,4 +9,64 @@ function query($query){
 	}
 	return $rows;
 }
+ 
+ function tambah($data){
+ 	global $conn;
+
+ 	$username = htmlspecialchars($data["username"]);
+	$password = htmlspecialchars($data["password"]);
+	$hak_akses = $data["hak_akses"];
+	$nama = htmlspecialchars($data["nama"]);
+	$jk = $data["jk"];
+	$tanggal_lahir = $data["tanggal_lahir"];
+	$alamat = htmlspecialchars($data["alamat"]);
+	$no_hp = htmlspecialchars($data["no_hp"]);
+	$email = htmlspecialchars($data["email"]);
+
+	$query = "INSERT INTO user
+			VALUES
+			('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
+				";
+	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+ }
+ 
+
+ function hapus($id_user){
+ 	global $conn;
+ 	mysqli_query($conn, "DELETE FROM user WHERE id_user = $id_user");
+ }
+
+
+function update($data){
+global $conn;
+
+	$id_user = $data["id_user"];
+ 	$username = htmlspecialchars($data["username"]);
+	$password = htmlspecialchars($data["password"]);
+	$hak_akses = $data["hak_akses"];
+	$nama = htmlspecialchars($data["nama"]);
+	$jk = $data["jk"];
+	$tanggal_lahir = $data["tanggal_lahir"];
+	$alamat = htmlspecialchars($data["alamat"]);
+	$no_hp = htmlspecialchars($data["no_hp"]);
+	$email = htmlspecialchars($data["email"]);
+	$query = "UPDATE user SET
+			username = '$username',
+			password = '$password',
+			hak_akses = '$hak_akses',
+			nama = '$nama',
+			jk = '$jk',
+			tanggal_lahir = '$tanggal_lahir',
+			alamat = '$alamat',
+			no_hp = '$no_hp',
+			email = '$email')
+			WHERE id_user = $id_user
+			";
+	mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+ 	}
+ 
  ?>
