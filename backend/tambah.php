@@ -2,19 +2,19 @@
 require 'functions.php';
 
 //cek submit
-if (isset($_POST["submit"]) ) {
+if (isset ($_POST["submit"]) ) {
 	//cek keberhasilan
-	if (tambah($_POST) > 0 ) {
+	if (add ($_POST) > 0 ) {
 		echo "
 			<script>
-				alert('Successed To Input');
+				alert('Successed To Input!');
 				document.location.href = 'index.php';
 			</script>
 		";
 	}else{
 		echo "
 			<script>
-				alert('Failed To Input');
+				alert('Failed To Input!');
 				document.location.href = 'index.php';
 			</script>
 		";

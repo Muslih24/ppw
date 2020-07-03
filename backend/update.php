@@ -1,10 +1,10 @@
-<?php 
+<?php
 require 'functions.php';
 
 $id_user = $_GET["id_user"];
 
 $user = query("SELECT * FROM user WHERE id_user = $id_user")[0];
-var_dump($user["id_user"]);
+
 
 //cek submit
 if (isset ($_POST["submit"]) ) {
@@ -48,7 +48,7 @@ if (isset ($_POST["submit"]) ) {
 		</li>
 		<li class="form-group">
 			<label for="hak_akses">Hak Akses :</label>
-			<select class="form-control" name="hak_akses" id="hak_akses" required value="<?= $user["hak_akses"]; ?>">	
+			<select class="form-control" name="hak_akses" id="hak_akses" required value="<?= $user["hak_akses"]; ?>">
 			<option value="">Pilih</option>
 			<option value="superadmin">SU</option>
 			<option value="admin">admin</option>

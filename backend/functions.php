@@ -1,4 +1,4 @@
-<?php 
+<?php
 $conn = mysqli_connect("localhost","root","","db_wisata");
 function query($query){
 	global $conn;
@@ -9,12 +9,12 @@ function query($query){
 	}
 	return $rows;
 }
- 
- function tambah($data){
+
+ function add($data){
  	global $conn;
 
  	$username = htmlspecialchars($data["username"]);
-	$password = htmlspecialchars($data["password"]);
+	$password = md5(htmlspecialchars($data["password"]));
 	$hak_akses = $data["hak_akses"];
 	$nama = htmlspecialchars($data["nama"]);
 	$jk = $data["jk"];
@@ -27,11 +27,12 @@ function query($query){
 			VALUES
 			('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
 				";
-	mysqli_query($conn, $query);
+				var_dump($query);
+	//mysqli_query($conn, $query);
 
-	return mysqli_affected_rows($conn);
+	//return mysqli_affected_rows($conn);
  }
- 
+
 
  function hapus($id_user){
  	global $conn;
@@ -52,21 +53,20 @@ global $conn;
 	$alamat = htmlspecialchars($data["alamat"]);
 	$no_hp = htmlspecialchars($data["no_hp"]);
 	$email = htmlspecialchars($data["email"]);
-	$query = "UPDATE user SET
+	$query = mysqli_query($conn, "UPDATE user SET
 			username = '$username',
-			password = '$password',
+			password = md5('$password'),
 			hak_akses = '$hak_akses',
 			nama = '$nama',
 			jk = '$jk',
 			tanggal_lahir = '$tanggal_lahir',
 			alamat = '$alamat',
 			no_hp = '$no_hp',
-			email = '$email')
-			WHERE id_user = $id_user
-			";
-	mysqli_query($conn, $query);
+			email = '$email'
+			WHERE id_user = $id_user");
+
 
 	return mysqli_affected_rows($conn);
  	}
- 
+
  ?>
