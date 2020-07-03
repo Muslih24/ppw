@@ -13,8 +13,8 @@ function query($query){
  function tambah($data){
  	global $conn;
 
- 	$username = htmlspecialchars($data["username"]);
-	$password = htmlspecialchars($data["password"]);
+ 	$username = strtolower(stripslashes($data["username"]));
+	$password = md5($data["password"]);
 	$hak_akses = $data["hak_akses"];
 	$nama = htmlspecialchars($data["nama"]);
 	$jk = $data["jk"];
@@ -23,6 +23,7 @@ function query($query){
 	$no_hp = htmlspecialchars($data["no_hp"]);
 	$email = htmlspecialchars($data["email"]);
 
+
 	$query = "INSERT INTO user
 			VALUES
 			('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
@@ -30,6 +31,8 @@ function query($query){
 	mysqli_query($conn, $query);
 
 	return mysqli_affected_rows($conn);
+	
+	
  }
  
 
@@ -68,5 +71,11 @@ global $conn;
 
 	return mysqli_affected_rows($conn);
  	}
+ 
+
+
+
+
+
  
  ?>
