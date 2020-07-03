@@ -19,6 +19,7 @@ if (isset($_POST["submit"]) ) {
 			</script>
 		";
 	}
+	
 
 }
  ?>
@@ -26,6 +27,11 @@ if (isset($_POST["submit"]) ) {
 <html>
 <head>
 	<title>Tambah Data User</title>
+	<style>
+		label{
+			display: block;
+		}
+	</style>
 </head>
 <body>
 
@@ -38,7 +44,7 @@ if (isset($_POST["submit"]) ) {
 		</li>
 		<li>
 			<label for="password">Password :</label>
-			<input type="varchar" name="password" id="password" required>
+			<input type="password" name="password" id="password" required>
 		</li>
 		<li class="form-group">
 			<label for="hak_akses">Hak Akses :</label>
