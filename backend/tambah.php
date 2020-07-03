@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'functions.php';
 
 //cek submit
@@ -48,7 +48,7 @@ if (isset($_POST["submit"]) ) {
 		</li>
 		<li class="form-group">
 			<label for="hak_akses">Hak Akses :</label>
-			<select class="form-control" name="hak_akses" id="hak_akses" required>	
+			<select class="form-control" name="hak_akses" id="hak_akses" required>
 			<option value="">Pilih</option>
 			<option value="superadmin">SU</option>
 			<option value="admin">admin</option>
