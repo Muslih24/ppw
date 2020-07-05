@@ -71,5 +71,29 @@ global $conn;
 
 	return mysqli_affected_rows($conn);
  	}
+function addw($data){
+ 	global $conn;
+
+ 	$nama_wisata = strtolower(stripslashes($data["nama_wisata"]));
+	$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
+	$harga = htmlspecialchars($data["harga"]);
+	$jarak = htmlspecialchars($data["jarak"]);
+	
+	$tikor_wisata = htmlspecialchars($data["tikor_wisata"]);
+	$fasilitas = htmlspecialchars($data["fasilitas"]);
+	$kategori = $data["kategori"];
+
+
+	$query = "INSERT INTO wisata
+			VALUES
+			('$nama_wisata', '$alamat_wisata', '$harga', '$jarak', '$tikor_wisata', '$fasilitas', '$kategori')
+				";
+				var_dump($query);
+	//mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+
+
+ }
 
  ?>
