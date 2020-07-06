@@ -33,7 +33,7 @@ $user = query("SELECT * FROM user");
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/ppw/backend/index.php">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -45,7 +45,7 @@ $user = query("SELECT * FROM user");
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="/ppw/backend/index.php">
+        <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -60,7 +60,7 @@ $user = query("SELECT * FROM user");
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="admin/index_admin.php ">
+        <a class="nav-link collapsed" href="admin/index_admin.php" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
