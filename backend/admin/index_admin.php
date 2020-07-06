@@ -21,6 +21,7 @@ $user = query("SELECT * FROM user");
   <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link  href="../../assets/css/style.css "rel="stylesheet">
 
 </head>
 
@@ -233,17 +234,12 @@ $user = query("SELECT * FROM user");
        <div class="container-fluid">
          <div class="dashboard">
            <a href="tambah.php">Tambah User</a>
-           	<table border="1" cellpadding="10" cellspacing="0">
+           	<table border="1" cellpadding="8" class="center" >
            		<tr>
            			<th>No</th>
            			<th>Username</th>
            			<th>Hak Akses</th>
            			<th>Nama</th>
-           			<th>Jenis Kelamin</th>
-           			<th>Tanggal Lahir</th>
-           			<th>Alamat</th>
-           			<th>No HP</th>
-           			<th>E-mail</th>
            			<th>Aksi</th>
            		</tr>
            		<?php $i = 1; ?>
@@ -254,11 +250,6 @@ $user = query("SELECT * FROM user");
            			<td><?= $row["username"]  ?></td>
            			<td><?= $row["hak_akses"]  ?></td>
            			<td><?= $row["nama"]  ?></td>
-           			<td><?= $row["jk"]  ?></td>
-           			<td><?= $row["tanggal_lahir"]  ?></td>
-           			<td><?= $row["alamat"]  ?></td>
-           			<td><?= $row["no_hp"]  ?></td>
-           			<td><?= $row["email"]  ?></td>
            			<td>
            				<a href="update.php?id_user=<?= $row["id_user"]  ?>">Edit</a> |
            				<a href="del.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');">Delete</a>
