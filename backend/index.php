@@ -54,7 +54,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="admin/index_admin.php" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="admin/index_admin.php">
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
