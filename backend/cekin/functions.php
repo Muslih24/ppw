@@ -71,10 +71,11 @@ global $conn;
 
 	return mysqli_affected_rows($conn);
  	}
+
 function addw($data){
  	global $conn;
 
- 	$nama_wisata = strtolower(stripslashes($data["nama_wisata"]));
+ 	$nama_wisata = strtolower(stripslashes($data["username"]));
 	$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
 	$harga = htmlspecialchars($data["harga"]);
 	$jarak = htmlspecialchars($data["jarak"]);
@@ -82,11 +83,12 @@ function addw($data){
 	$tikor_wisata = htmlspecialchars($data["tikor_wisata"]);
 	$fasilitas = htmlspecialchars($data["fasilitas"]);
 	$kategori = $data["kategori"];
+	$lampiran = htmlspecialchars($data["lampiran"]);
 
 
 	$query = "INSERT INTO wisata
 			VALUES
-			('$nama_wisata', '$alamat_wisata', '$harga', '$jarak', '$tikor_wisata', '$fasilitas', '$kategori')
+			('', $nama_wisata', '$alamat_wisata', '$harga', '$jarak', '$tikor_wisata', '$fasilitas', '$kategori', '$lampiran')
 				";
 				var_dump($query);
 	//mysqli_query($conn, $query);
@@ -95,5 +97,4 @@ function addw($data){
 
 
  }
-
  ?>
