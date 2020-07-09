@@ -2,6 +2,11 @@
 require 'functions.php';
 
 $user = query("SELECT * FROM user");
+
+if (isset($_POST["cari"])) {
+  $user = cari($_POST["keyword"]);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -234,6 +239,14 @@ $user = query("SELECT * FROM user");
        <div class="container-fluid">
          <div class="dashboard">
            <a href="tambah.php">Tambah User</a>
+         <br><br>
+
+          <form action="" method="post">
+            <input type="text" name="keyword" size="30" autofocus placeholder="Masukan Keyword yang Anda Cari..." autocomplete="off">
+            <button type="submit" name="cari">Search!</button>
+          </form>
+          <br>
+
            	<table border="1" cellpadding="8" class="center" >
            		<tr>
            			<th>No</th>
