@@ -96,4 +96,12 @@ function addw($data){
 
  }
 
+function cari($keyword){
+	$query = "SELECT * FROM user 
+		WHERE
+		username LIKE '%$keyword%' OR
+		nama LIKE '%$keyword%'
+		";	
+	return query($query);
+}
  ?>
