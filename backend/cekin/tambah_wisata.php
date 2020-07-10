@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'functions.php';
 
 if (isset ($_POST["submit"]) ) {
@@ -18,7 +18,7 @@ if (isset ($_POST["submit"]) ) {
 			</script>
 		";
 	}
-	
+
 
 }
  ?>
@@ -27,12 +27,16 @@ if (isset ($_POST["submit"]) ) {
 <head>
 	<title>Tambah Data Wisata</title>
 	<style>
+	#nama_wisata{
+		border-radius: 20px;
+		outline: inherit;
+	}
 		label{
 			display: block;
 		}
 	</style>
 </head>
-<body>	
+<body>
 
 <h1>Tambah Data Wisata</h1>
 <form action="" method="post">
