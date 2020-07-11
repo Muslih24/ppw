@@ -30,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/ppw/backend/index.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -286,12 +286,15 @@
 					 			<label for="email">Email :</label>
 					 			<input class="form-control" type="varchar" name="email" id="email" required>
 					 		</div>
+							<br>
 
-					 		<div class="btn-group">
+					 		<div class="col-md-">
 								<button type="submit" class="btn btn-primary" name="submit">Simpan Data</button>
 					 			<button type="Cancel" class="btn btn-secondary">Batal</button>
 					 		</div>
-					
+
+							<br><br>
+							</div>
 					 	</div>
 						</div>
 					 </form>
