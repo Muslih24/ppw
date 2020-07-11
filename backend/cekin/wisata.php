@@ -33,7 +33,7 @@ $wisata = query("SELECT * FROM wisata");
 	<td><?= $row["fasilitas"] ?></td>
 	<td><?= $row["kategori"] ?></td>
 	<td>
-		<a href="update_wisata.php?id_wisata=<?= $row["id_wisata"]  ?>">Edit</a> |
+		<a href="edit.php?id_wisata=<?= $row["id_wisata"]  ?>">Edit</a> |
         <a href="del.php?id_wisata=<?= $row["id_wisata"]  ?>"onclick=" return confirm('hapus?');">Delete</a>
 	</tr>
 	</td>
