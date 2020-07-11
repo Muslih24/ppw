@@ -95,6 +95,32 @@ function addw($data){
 
 	return mysqli_affected_rows($conn);
 
-
  }
+
+ function edit($data){
+global $conn;
+
+	$id_wisata = $data["id_wisata"];
+ 	$nama_wisata = htmlspecialchars($data["nama_wisata"]);
+	$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
+	$harga = htmlspecialchars($data["harga"]);
+	$jarak = htmlspecialchars($data["jarak"]);
+	$tikor_wisata = htmlspecialchars($data["tikor_wisata"]);
+	$fasilitas = htmlspecialchars($data["fasilitas"]);
+	$kategori = $data["kategori"];
+	$lampiran = $data["lampiran"];
+	$query = mysqli_query($conn, "UPDATE wisata SET
+			nama_wisata = '$nama_wisata',
+			alamat_wisata = '$alamat_wisata',
+			harga = '$harga',
+			jarak = '$jarak',
+			tikor_wisata = '$tikor_wisata',
+			fasilitas = '$fasilitas',
+			kategori = '$kategori'
+			lampiran = '$lampiran'
+			WHERE id_wisata = $id_wisata");
+
+
+	return mysqli_affected_rows($conn);
+ 	}
  ?>
