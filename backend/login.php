@@ -1,26 +1,26 @@
-<?php 
-require 'functions.php';
-
-if (isset($_POSH["login"]) ) {
- 	
-	$username = $_POSH["username"];
-	$password = $_POSH["password"];
-
-$a = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
-
-
-	var_dump($a);
+<?php
+// require 'admin/functions.php';
+//
+// if (isset($_POSH["login"]) ) {
+//
+// 	$username = $_POSH["username"];
+// 	$password = $_POSH["password"];
+//
+// $a = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+//
+//
+// 	var_dump($a);
 	// if (mysqli_num_rows($result) === 1 ) {
 
 	// 	$rows = mysql_fetch_assoc($result);
-		
+
 	// 	if(password_verify($password, $row["password"]) ) {
 	// 		header("Location: index.php");
 	// 		exit;
 	// 	}
 	//}
 
- } 
+// }
  ?>
 <!DOCTYPE html>
 <html>
@@ -31,7 +31,6 @@ $a = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
 
 <h1>Halaman Login</h1>
 
-<form action="" method="post">
 
 <ul>
 	<li>
@@ -43,9 +42,9 @@ $a = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
 		<input type="password" name="password" id="password">
 	</li>
 	<li>
-		<button type="submit" name="login">Sign In</button>
+		<button> <a href="index.php">Sign In</a></button>
 	</li>
-</ul>	
+</ul>
 
 
 </form>

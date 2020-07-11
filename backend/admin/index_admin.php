@@ -66,7 +66,7 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="admin/index_admin.php ">
+        <a class="nav-link collapsed" href="index_admin.php ">
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
@@ -158,11 +158,11 @@ if (isset($_POST["cari"])) {
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+          <form action="" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="submit" name="cari">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
@@ -232,19 +232,16 @@ if (isset($_POST["cari"])) {
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">Data Admin</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"></a> -->
           </div>
        </div>
        <div class="container-fluid">
-         <div class="dashboard">
+         <div class="admin">
            <a href="tambah.php">Tambah User</a>
          <br><br>
 
-          <form action="" method="post">
-            <input type="text" name="keyword" size="30" autofocus placeholder="Masukan Keyword yang Anda Cari..." autocomplete="off">
-            <button type="submit" name="cari">Search!</button>
-          </form>
+
           <br>
 
            	<table border="1" cellpadding="8" class="center" >

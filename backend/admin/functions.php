@@ -24,14 +24,14 @@ function query($query){
 	$email = htmlspecialchars($data["email"]);
 
 
-	$query = "INSERT INTO user
-			VALUES
-			('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
+	$query = "INSERT INTO user VALUES	('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
 				";
-				var_dump($query);
-	//mysqli_query($conn, $query);
 
-	return mysqli_affected_rows($conn);
+
+$a = mysqli_query($conn,$query);
+
+
+//return mysqli_affected_rows($conn);
 
 
  }
@@ -78,7 +78,7 @@ function addw($data){
 	$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
 	$harga = htmlspecialchars($data["harga"]);
 	$jarak = htmlspecialchars($data["jarak"]);
-	
+
 	$tikor_wisata = htmlspecialchars($data["tikor_wisata"]);
 	$fasilitas = htmlspecialchars($data["fasilitas"]);
 	$kategori = $data["kategori"];
@@ -97,11 +97,11 @@ function addw($data){
  }
 
 function cari($keyword){
-	$query = "SELECT * FROM user 
+	$query = "SELECT * FROM user
 		WHERE
 		username LIKE '%$keyword%' OR
 		nama LIKE '%$keyword%'
-		";	
+		";
 	return query($query);
 }
  ?>

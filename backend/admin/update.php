@@ -13,14 +13,14 @@ if (isset ($_POST["submit"]) ) {
 		echo "
 			<script>
 				alert('Successed To Update!');
-				document.location.href = 'index.php';
+				document.location.href = 'index_admin.php';
 			</script>
 		";
 	}else{
 		echo "
 			<script>
 				alert('Failed To Update!');
-				document.location.href = 'index.php';
+				document.location.href = 'index_admin.php';
 			</script>
 		";
 	}
