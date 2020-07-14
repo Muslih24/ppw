@@ -1,18 +1,32 @@
 <?php
 require '../functions.php';
-//
-// if ( !isset($_SESSION["login"])) {
-//   header("Location:../login.php");
-// }
 
-$user = query("SELECT * FROM user");
+$id_user = $_GET["id_user"];
 
-if (isset($_POST["cari"])) {
-  $user = cari($_POST["keyword"]);
+$user = query("SELECT * FROM user WHERE id_user = $id_user")[0];
+
+
+//cek submit
+if (isset ($_POST["submit"]) ) {
+	//cek keberhasilan
+	if (update ($_POST) > 0 ) {
+		echo "
+			<script>
+				alert('Successed To Update!');
+				document.location.href = 'index_admin.php';
+			</script>
+		";
+	}else{
+		echo "
+			<script>
+				alert('Failed To Update!');
+				document.location.href = 'index_admin.php';
+			</script>
+		";
+	}
+
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,11 +40,11 @@ if (isset($_POST["cari"])) {
 
   <title>Buwung Puyuh</title>
 
-  <!-- Custom fonts for this template-->
   <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
-  <link  href="../../assets/css/style.css "rel="stylesheet">
+	<link href="../../assets/css/bootstrap.css" rel="stylesheet">
+	<link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../../assets/css/style" rel="stylesheet">
 
 </head>
 
@@ -53,9 +67,11 @@ if (isset($_POST["cari"])) {
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
+
+
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="/ppw/backend/index.php">
+        <a class="nav-link " href="/ppw/backend/index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -70,7 +86,7 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="index_admin.php ">
+        <a class="nav-link " href="/ppw/backend/admin/index_admin.php">
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
@@ -79,7 +95,7 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-leaf"></i>
           <span>Wisata</span>
         </a>
@@ -104,7 +120,7 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link disabled" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pages</span>
         </a>
@@ -124,14 +140,14 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link disabled" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link disabled" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li>
@@ -161,17 +177,7 @@ if (isset($_POST["cari"])) {
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
-          <form action="" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="submit" name="cari">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -230,53 +236,94 @@ if (isset($_POST["cari"])) {
 
         </nav>
         <!-- End of Topbar -->
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">Admin</li>
-        </ol>
-        </nav>
+
+				<nav aria-label="breadcrumb">
+  				<ol class="breadcrumb">
+    				<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Update Data</li>
+  			</ol>
+			</nav>
+
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Data Admin</h1>
+            <h1 class="h3 mb-0 text-gray-800">Edit Data</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"></a> -->
           </div>
        </div>
        <div class="container-fluid">
-         <div class="admin">
-           <a href="addadmin.php">Tambah Data</a>
-         <br><br>
+         <div class="updateadmin">
+					 <form action="" method="post">
+					 	<div class="row">
+							<div class="col-md-6">
 
+								<div class="form-group">
+									<label for="username">Username :</label>
+									<input class="form-control" type="hidden" name="id_user" id="username" required value="<?= $user["id_user"] ?>">
+									<input class="form-control" type="varchar" name="username" id="username" required value="<?= $user["username"]?>" >
+								</div>
 
-          <br>
+								<div class="form-group">
+									<label for="password">Password :</label>
+									<input class="form-control" type="password" name="password" id="password" required >
+								</div>
 
-           	<table border="1" cellpadding="8" class="center" >
-           		<tr>
-           			<th>No</th>
-           			<th>Username</th>
-           			<th>Hak Akses</th>
-           			<th>Nama</th>
-           			<th>Aksi</th>
-           		</tr>
-           		<?php $i = 1; ?>
-           		<?php foreach ($user as $row) :	?>
+					 			<div class="form-group">
+									<label for="hak_akses">Hak Akses :</label>
+					 				<select class="form-control" name="hak_akses" id="hak_akses" required value="<?= $user["hak_akses"] ?>">
+					 					<option value="">Pilih</option>
+					 					<option value="superadmin">Super Admin</option>
+					 					<option value="admin">Admin</option>
+					 				</select>
+					 		</div>
 
-           		<tr>
-           			<td><?= $i; ?></td>
-           			<td><?= $row["username"]  ?></td>
-           			<td><?= $row["hak_akses"]  ?></td>
-           			<td><?= $row["nama"]  ?></td>
-           			<td>
-           				<a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">Edit</a> |
-           				<a href="deleteadmin.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');">Delete</a>
-           			</td>
-           		</tr>
-           	<?php $i++; ?>
-           	<?php endforeach; ?>
-           	</table>
+					 		<div class="form-group">
+					 			<label for="nama">Nama :</label>
+					 			<input class="form-control" type="varchar" name="nama" id="nama" required value="<?= $user["nama"] ?>">
+					 		</div>
 
+					 		<div class="form-group">
+					 			<label for="jk">Jenis Kelamin :</label>
+					 			<select class="form-control" name="jk" id="jk" required value="<?= $user["jk"] ?>">
+					 				<option value="">Pilih</option>
+					 				<option value="laki-laki">Laki-laki</option>
+					 				<option value="perempuan">Perempuan</option>
+					 			</select>
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="tanggal_lahir">Tanggal Lahir :</label>
+					 			<input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" required value="<?= $user["tanggal_lahir"] ?>">
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="alamat">Alamat :</label>
+					 			<input class="form-control" type="text" name="alamat" required value="<?= $user["alamat"] ?>">
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="no_hp">No Hp :</label>
+					 			<input class="form-control" type="varchar" name="no_hp" id="no_hp" required value="<?= $user["no_hp"] ?>">
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="email">Email :</label>
+					 			<input class="form-control" type="varchar" name="email" id="email" required value="<?= $user["email"] ?>">
+					 		</div>
+							<br>
+
+					 		<div class="col-md-">
+								<button type="submit" class="btn btn-primary" name="submit">Simpan Data</button>
+					 			<button type="Cancel" class="btn btn-secondary">Batal</button>
+					 		</div>
+
+							<br><br>
+							</div>
+					 	</div>
+						</div>
+					 </form>
          </div>
        </div>
     </div>

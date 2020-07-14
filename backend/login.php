@@ -1,26 +1,25 @@
 <?php
-// require 'admin/functions.php';
-//
-// if (isset($_POSH["login"]) ) {
-//
-// 	$username = $_POSH["username"];
-// 	$password = $_POSH["password"];
-//
-// $a = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
-//
-//
-// 	var_dump($a);
-	// if (mysqli_num_rows($result) === 1 ) {
+require 'functions.php';
 
-	// 	$rows = mysql_fetch_assoc($result);
+if (isset($_POST["login"]) ) {
 
-	// 	if(password_verify($password, $row["password"]) ) {
-	// 		header("Location: index.php");
-	// 		exit;
-	// 	}
-	//}
 
-// }
+
+	$username = $_POST["username"];
+	$password =  md5($_POST["password"]);
+
+$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+
+$row = mysqli_fetch_assoc($result);
+	if (mysqli_num_rows($result) === 1 ) {
+		     header("Location:index.php");
+		}else {
+      echo "wow";
+
+	}
+
+}
  ?>
 <!DOCTYPE html>
 <html>
@@ -31,18 +30,19 @@
 
 <h1>Halaman Login</h1>
 
+<form  action="" method="post">
 
 <ul>
 	<li>
 		<label for="username">Username :</label>
-		<input type="varchar" name="username" id="username">
+		<input type="text" name="username" id="username">
 	</li>
 	<li>
 		<label for="password">Password :</label>
 		<input type="password" name="password" id="password">
 	</li>
 	<li>
-		<button> <a href="index.php">Sign In</a></button>
+		<button type="submit" name="login">Login </button>
 	</li>
 </ul>
 

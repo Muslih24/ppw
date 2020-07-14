@@ -1,3 +1,27 @@
+<?php
+require '../functions.php';
+
+//cek submit
+if (isset($_POST["submit"]) ) {
+	//cek keberhasilan
+	if (add($_POST) > 0 ) {
+		echo "
+			<script>
+				alert('Successed To Input');
+				document.location.href = 'index_admin.php';
+			</script>
+		";
+	}else{
+		echo "
+			<script>
+				alert('Failed To Input');
+				document.location.href = 'index_admin.php';
+			</script>
+		";
+	}
+
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,9 +35,7 @@
 
   <title>Buwung Puyuh</title>
 
-  <!-- Custom fonts for this template-->
   <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
 	<link href="../../assets/css/bootstrap.css" rel="stylesheet">
 	<link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -42,7 +64,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link disabled" href="/ppw/backend/index.php">
+        <a class="nav-link " href="/ppw/backend/index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -57,7 +79,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link disabled" href="/ppw/backend/admin/index_admin.php">
+        <a class="nav-link " href="/ppw/backend/admin/index_admin.php">
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
@@ -66,7 +88,7 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-leaf"></i>
           <span>Wisata</span>
         </a>
@@ -148,17 +170,7 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -218,6 +230,13 @@
         </nav>
         <!-- End of Topbar -->
 
+				<nav aria-label="breadcrumb">
+  				<ol class="breadcrumb">
+    				<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Add Data</li>
+  			</ol>
+			</nav>
+
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -247,9 +266,8 @@
 									<label for="hak_akses">Hak Akses :</label>
 					 				<select class="form-control" name="hak_akses" id="hak_akses" required>
 					 					<option value="">Pilih</option>
-					 					<option value="superadmin">SU</option>
-					 					<option value="admin">admin</option>
-					 					<option value="adminlokasi">adminlokasi</option>
+					 					<option value="superadmin">Super Admin</option>
+					 					<option value="admin">Admin</option>
 					 				</select>
 					 		</div>
 

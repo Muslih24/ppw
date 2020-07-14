@@ -28,16 +28,16 @@ function query($query){
 				";
 
 
-$a = mysqli_query($conn,$query);
+mysqli_query($conn,$query);
 
 
-//return mysqli_affected_rows($conn);
+return mysqli_affected_rows($conn);
 
 
  }
 
 
- function hapus($id_user){
+ function delete($id_user){
  	global $conn;
  	mysqli_query($conn, "DELETE FROM user WHERE id_user = $id_user");
  }
