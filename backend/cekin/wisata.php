@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'functions.php';
 
 $wisata = query("SELECT * FROM wisata");
@@ -11,6 +11,7 @@ $wisata = query("SELECT * FROM wisata");
 </head>
 <body>
 	<div>
+  <a href="../logout.php">logotu</a>
 	<a href="tambah_wisata.php">Tambah Wisata</a>
       <table border="1" cellpadding="10" cellspacing="0">
 	<tr>

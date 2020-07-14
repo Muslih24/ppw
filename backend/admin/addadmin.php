@@ -1,5 +1,10 @@
 <?php
+session_start();
 require '../functions.php';
+//
+if ($_SESSION["hak_akses"]=="") {
+	header("Location:../login.php");
+}
 
 //cek submit
 if (isset($_POST["submit"]) ) {
@@ -39,7 +44,7 @@ if (isset($_POST["submit"]) ) {
 	<link href="../../assets/css/bootstrap.css" rel="stylesheet">
 	<link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="../../assets/css/style" rel="stylesheet">
+  <link href="../../assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -163,12 +168,9 @@ if (isset($_POST["submit"]) ) {
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top ">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
 
 
 
@@ -176,25 +178,6 @@ if (isset($_POST["submit"]) ) {
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -230,12 +213,10 @@ if (isset($_POST["submit"]) ) {
         </nav>
         <!-- End of Topbar -->
 
-				<nav aria-label="breadcrumb">
-  				<ol class="breadcrumb">
-    				<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Add Data</li>
-  			</ol>
-			</nav>
+				<div class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Update Data</li>
+				</div>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">

@@ -1,5 +1,10 @@
 <?php
+session_start();
 require '../functions.php';
+
+if ($_SESSION["hak_akses"]=="") {
+	header("Location:../login.php");
+}
 
 $id_user = $_GET["id_user"];
 
@@ -170,14 +175,7 @@ if (isset ($_POST["submit"]) ) {
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
-
-
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top ">
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -236,16 +234,15 @@ if (isset ($_POST["submit"]) ) {
 
         </nav>
         <!-- End of Topbar -->
+			<div class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Update Data</li>
+			</div>
 
-				<nav aria-label="breadcrumb">
-  				<ol class="breadcrumb">
-    				<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Update Data</li>
-  			</ol>
-			</nav>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">

@@ -1,23 +1,49 @@
 <?php
-require 'functions.php';
+session_start();
+
+if (isset($_SESSION["login"])) {
+	// code...
+	if(($_SESSION["hak_akses"]=="superadmin")) {
+		header("Location:index.php");
+	}elseif(($_SESSION["hak_akses"]=="admin")) {
+		header("Location:cekin/wisata.php");
+	}else {
+		header("Location:login.php");
+	}
+}
+
+	require 'functions.php';
 
 if (isset($_POST["login"]) ) {
-
-
 
 	$username = $_POST["username"];
 	$password =  md5($_POST["password"]);
 
-$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+	$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+	$a = mysqli_num_rows($result);
 
+		if ($a > 0) {
+			$row = mysqli_fetch_assoc($result);
 
-$row = mysqli_fetch_assoc($result);
-	if (mysqli_num_rows($result) === 1 ) {
-		     header("Location:index.php");
+			if ($row["hak_akses"]=="superadmin") {
+				$_SESSION["username"] = $username ;
+				$_SESSION["hak_akses"] = "superadmin" ;
+				$_SESSION["login"] = true ;
+				header("Location:index.php");
+				//echo "superadmin";
+			}elseif ($row["hak_akses"]=="admin") {
+				$_SESSION["username"] = $username;
+				$_SESSION["hak_akses"] = "admin";
+				$_SESSION["login"] = true ;
+
+				echo "kau bukan super admin";
+			}else {
+				header("Location:login.php");
+			}
+
 		}else {
-      echo "wow";
-
-	}
+			header("Location:login.php");
+		}
 
 }
  ?>

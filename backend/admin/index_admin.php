@@ -1,9 +1,10 @@
 <?php
+session_start();
 require '../functions.php';
 //
-// if ( !isset($_SESSION["login"])) {
-//   header("Location:../login.php");
-// }
+if ($_SESSION["hak_akses"]=="") {
+  header("Location:../login.php");
+}
 
 //pagination
 //konfigurasi
@@ -166,12 +167,7 @@ if (isset($_POST["cari"])) {
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
 
           <!-- Topbar Search -->
           <form action="" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -244,11 +240,9 @@ if (isset($_POST["cari"])) {
 
         </nav>
         <!-- End of Topbar -->
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">Admin</li>
-        </ol>
-        </nav>
+        <div class="breadcrumb">
+  					<li class="breadcrumb-item" aria-current="active">Admin</li>
+  			</div>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -297,8 +291,9 @@ if (isset($_POST["cari"])) {
            			<td><?= $row["hak_akses"]  ?></td>
            			<td><?= $row["nama"]  ?></td>
            			<td>
-           				<a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">Edit</a> |
-           				<a href="deleteadmin.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');">Delete</a>
+
+                  <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-primary">Edit</button></a>
+                  <a href="deleteadmin.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
            			</td>
            		</tr>
            	<?php $i++; ?>
@@ -331,7 +326,7 @@ if (isset($_POST["cari"])) {
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="../logout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -346,6 +341,7 @@ if (isset($_POST["cari"])) {
 
   <!-- Custom scripts for all pages-->
   <script src="../../assets/js/sb-admin-2.min.js"></script>
+  <script src="../../assets/js/jquery.js"></script>
 
   <!-- Page level plugins -->
   <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
