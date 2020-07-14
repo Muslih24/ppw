@@ -5,7 +5,19 @@ require '../functions.php';
 //   header("Location:../login.php");
 // }
 
-$user = query("SELECT * FROM user");
+//pagination
+//konfigurasi
+$jumlahuserperhalaman = 2;
+//hitung jmlh data
+$jumlahdata = count(query('SELECT * FROM user'));
+$jumlahhalaman = ceil($jumlahdata / $jumlahuserperhalaman);
+$halaktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
+//halaman = 2, awalData = 5
+//halaman = 3, awalData = 10
+$awalData = ($jumlahuserperhalaman*$halaktif) - $jumlahuserperhalaman;
+
+
+$user = query("SELECT * FROM user LIMIT $awalData, $jumlahuserperhalaman");
 
 if (isset($_POST["cari"])) {
   $user = cari($_POST["keyword"]);
@@ -173,6 +185,8 @@ if (isset($_POST["cari"])) {
             </div>
           </form>
 
+
+
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
@@ -248,9 +262,23 @@ if (isset($_POST["cari"])) {
          <div class="admin">
            <a href="addadmin.php">Tambah Data</a>
          <br><br>
+         <!-- ini halaman!!! -->
+         <?php if($halaktif > 1 ) : ?>
+          <a href="?halaman=<?= $halaktif - 1; ?>">&laquo;</a>
+         <?php endif; ?>
 
+          <?php for ($i = 1; $i <= $jumlahhalaman; $i++) : ?>
+            <?php if ( $i == $halaktif ) : ?>
+            <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: red;"><?= $i ?></a>
+            <?php else : ?>
+              <a href="?halaman=<?= $i; ?>"><?= $i ?></a>
+            <?php endif ?>
+          <?php endfor; ?>
+<?php if($halaktif < $jumlahhalaman ) : ?>
+          <a href="?halaman=<?= $halaktif + 1; ?>">&raquo;</a>
+         <?php endif; ?>
 
-          <br>
+          <br><br>
 
            	<table border="1" cellpadding="8" class="center" >
            		<tr>
