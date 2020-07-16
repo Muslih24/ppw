@@ -71,6 +71,68 @@ global $conn;
 
 	return mysqli_affected_rows($conn);
  	}
+
+	function addk($data){
+		global $conn;
+
+		$nama_kategori = htmlspecialchars($data["nama_kategori"]);
+		$deskripsi_kategori = htmlspecialchars($data["deskripsi_kategori"]);
+
+		$foto_kategori = upload();
+			if (!$foto_kategori) {
+				return false;
+			}
+
+		$query = "INSERT INTO kategori VALUES('','$nama_kategori','$deskripsi_kategori','$foto_kategori')";
+
+
+		mysqli_query($conn,$query);
+
+		return mysqli_affected_rows($conn);
+	}
+
+	function upload(){
+		$namaFile = $_FILES["foto_kategori"]["name"];
+		$ukuranFile = $_FILES["foto_kategori"]["size"];
+		$error = $_FILES["foto_kategori"]["error"];
+		$tmpName = $_FILES["foto_kategori"]["tmp_name"];
+		$eksgambarvalid = ['jpg','jpeg','png'];
+
+		if ($error === 4) {
+			echo "<script>
+			alert('Pilih gambar bang');
+			</script>";
+			return false;
+		}
+
+		$eksgambar = explode('.', $namaFile);
+		$eksgambar = strtolower(end($eksgambar));
+		$namaBaru = date("YmdHis");
+		$namaBaru .= '.';
+		$namaBaru .= $eksgambar;
+
+		var_dump($namaBaru);die;
+		if (!in_array($eksgambar, $eksgambarvalid)) {
+			echo "<script>
+			alert('Bukan gambar itu teh');
+			</script>";
+			return false;
+		}
+
+		if ($ukuranFile > 3000000) {
+			echo "<script>
+			alert('Ukurannya kebesaran');
+			</script>";
+			return false;
+		}
+
+		move_uploaded_file($tmpName, 'images/' .$namaBaru);
+
+		return $namaBaru;
+
+	}
+
+
 function addw($data){
  	global $conn;
 
@@ -78,15 +140,11 @@ function addw($data){
 	$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
 	$harga = htmlspecialchars($data["harga"]);
 	$jarak = htmlspecialchars($data["jarak"]);
-
 	$tikor_wisata = htmlspecialchars($data["tikor_wisata"]);
 	$fasilitas = htmlspecialchars($data["fasilitas"]);
-	$kategori = $data["kategori"];
 
 
-	$query = "INSERT INTO wisata
-			VALUES
-			('$nama_wisata', '$alamat_wisata', '$harga', '$jarak', '$tikor_wisata', '$fasilitas', '$kategori')
+	$query = "INSERT INTO wisata	VALUES	('$nama_wisata', '$alamat_wisata', '$harga', '$jarak', '$tikor_wisata', '$fasilitas', '$kategori')
 				";
 				var_dump($query);
 	//mysqli_query($conn, $query);

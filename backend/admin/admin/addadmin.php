@@ -1,37 +1,31 @@
 <?php
 session_start();
-require '../functions.php';
-
-if ($_SESSION["hak_akses"]=="") {
-	header("Location:../login.php");
+require '../../functions.php';
+//
+if (!$_SESSION["hak_akses"]=="superadmin") {
+	header("Location:../../login.php");
 }
 
-$id_user = $_GET["id_user"];
-
-$user = query("SELECT * FROM user WHERE id_user = $id_user")[0];
-
-
 //cek submit
-if (isset ($_POST["submit"]) ) {
+if (isset($_POST["submit"]) ) {
 	//cek keberhasilan
-	if (update ($_POST) > 0 ) {
+	if (add($_POST) > 0 ) {
 		echo "
 			<script>
-				alert('Successed To Update!');
+				alert('Successed To Input');
 				document.location.href = 'index_admin.php';
 			</script>
 		";
 	}else{
 		echo "
 			<script>
-				alert('Failed To Update!');
+				alert('Failed To Input');
 				document.location.href = 'index_admin.php';
 			</script>
 		";
 	}
-
 }
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,11 +39,11 @@ if (isset ($_POST["submit"]) ) {
 
   <title>Buwung Puyuh</title>
 
-  <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-	<link href="../../assets/css/bootstrap.css" rel="stylesheet">
-	<link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="../../assets/css/style" rel="stylesheet">
+  <link href="../../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+	<link href="../../../assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../../../assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -72,8 +66,6 @@ if (isset ($_POST["submit"]) ) {
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
-
-
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link " href="/ppw/backend/index.php">
@@ -91,7 +83,7 @@ if (isset ($_POST["submit"]) ) {
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link " href="/ppw/backend/admin/index_admin.php">
+        <a class="nav-link " href="index_admin.php">
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
@@ -177,29 +169,14 @@ if (isset ($_POST["submit"]) ) {
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar static-top ">
 
+          <!-- Sidebar Toggle (Topbar) -->
+
+
+
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -234,42 +211,40 @@ if (isset ($_POST["submit"]) ) {
 
         </nav>
         <!-- End of Topbar -->
-			<div class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Update Data</li>
-			</div>
 
+				<div class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Update Data</li>
+				</div>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Edit Data</h1>
+            <h1 class="h3 mb-0 text-gray-800">Tambah Data</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"></a> -->
           </div>
        </div>
        <div class="container-fluid">
-         <div class="updateadmin">
+         <div class="addadmin">
 					 <form action="" method="post">
 					 	<div class="row">
 							<div class="col-md-6">
 
 								<div class="form-group">
 									<label for="username">Username :</label>
-									<input class="form-control" type="hidden" name="id_user" id="username" required value="<?= $user["id_user"] ?>">
-									<input class="form-control" type="varchar" name="username" id="username" required value="<?= $user["username"]?>" >
+									<input class="form-control" type="varchar" name="username" id="username" required>
 								</div>
 
 								<div class="form-group">
 									<label for="password">Password :</label>
-									<input class="form-control" type="password" name="password" id="password" required >
+									<input class="form-control" type="password" name="password" id="password" required>
 								</div>
 
 					 			<div class="form-group">
 									<label for="hak_akses">Hak Akses :</label>
-					 				<select class="form-control" name="hak_akses" id="hak_akses" required value="<?= $user["hak_akses"] ?>">
+					 				<select class="form-control" name="hak_akses" id="hak_akses" required>
 					 					<option value="">Pilih</option>
 					 					<option value="superadmin">Super Admin</option>
 					 					<option value="admin">Admin</option>
@@ -278,12 +253,12 @@ if (isset ($_POST["submit"]) ) {
 
 					 		<div class="form-group">
 					 			<label for="nama">Nama :</label>
-					 			<input class="form-control" type="varchar" name="nama" id="nama" required value="<?= $user["nama"] ?>">
+					 			<input class="form-control" type="varchar" name="nama" id="nama" required>
 					 		</div>
 
 					 		<div class="form-group">
 					 			<label for="jk">Jenis Kelamin :</label>
-					 			<select class="form-control" name="jk" id="jk" required value="<?= $user["jk"] ?>">
+					 			<select class="form-control" name="jk" id="jk" required>
 					 				<option value="">Pilih</option>
 					 				<option value="laki-laki">Laki-laki</option>
 					 				<option value="perempuan">Perempuan</option>
@@ -292,22 +267,22 @@ if (isset ($_POST["submit"]) ) {
 
 					 		<div class="form-group">
 					 			<label for="tanggal_lahir">Tanggal Lahir :</label>
-					 			<input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" required value="<?= $user["tanggal_lahir"] ?>">
+					 			<input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" required>
 					 		</div>
 
 					 		<div class="form-group">
 					 			<label for="alamat">Alamat :</label>
-					 			<input class="form-control" type="text" name="alamat" required value="<?= $user["alamat"] ?>">
+					 			<textarea class="form-control" type="text" name="alamat" required></textarea>
 					 		</div>
 
 					 		<div class="form-group">
 					 			<label for="no_hp">No Hp :</label>
-					 			<input class="form-control" type="varchar" name="no_hp" id="no_hp" required value="<?= $user["no_hp"] ?>">
+					 			<input class="form-control" type="varchar" name="no_hp" id="no_hp" required>
 					 		</div>
 
 					 		<div class="form-group">
 					 			<label for="email">Email :</label>
-					 			<input class="form-control" type="varchar" name="email" id="email" required value="<?= $user["email"] ?>">
+					 			<input class="form-control" type="varchar" name="email" id="email" required>
 					 		</div>
 							<br>
 
@@ -347,28 +322,28 @@ if (isset ($_POST["submit"]) ) {
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="../../logout.php">Logout</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../../assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../../assets/js/sb-admin-2.min.js"></script>
+  <script src="../../../assets/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
+  <script src="../../../assets/vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../../assets/js/demo/chart-area-demo.js"></script>
-  <script src="../../assets/js/demo/chart-pie-demo.js"></script>
+  <script src="../../../assets/js/demo/chart-area-demo.js"></script>
+  <script src="../../../assets/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

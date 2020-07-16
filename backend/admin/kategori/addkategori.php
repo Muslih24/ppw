@@ -1,29 +1,27 @@
 <?php
 session_start();
-require '../functions.php';
-//
-if ($_SESSION["hak_akses"]=="") {
-  header("Location:../login.php");
+require '../../functions.php';
+
+if (!$_SESSION["hak_akses"]=="superadmin") {
+  header("Location:../../login.php");
 }
 
-//pagination
-//konfigurasi
-$jumlahuserperhalaman = 2;
-//hitung jmlh data
-$jumlahdata = count(query('SELECT * FROM user'));
-$jumlahhalaman = ceil($jumlahdata / $jumlahuserperhalaman);
-$halaktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
-//halaman = 2, awalData = 5
-//halaman = 3, awalData = 10
-$awalData = ($jumlahuserperhalaman*$halaktif) - $jumlahuserperhalaman;
 
-
-$user = query("SELECT * FROM user LIMIT $awalData, $jumlahuserperhalaman");
-
-if (isset($_POST["cari"])) {
-  $user = cari($_POST["keyword"]);
+if (isset($_POST["submit"])) {
+  if (addk($_POST) > 0) {
+    echo "<script>
+    alert ('Successed To Input');
+    document.location.href = 'index_kategori.php';
+    </script>
+    ";
+  }else {
+    "<script>
+    alert ('Failed To Input');
+    document.location.href = 'index_kategori.php';
+    </script>
+    ";
+  }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +37,11 @@ if (isset($_POST["cari"])) {
 
   <title>Buwung Puyuh</title>
 
-  <!-- Custom fonts for this template-->
-  <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
-  <link  href="../../assets/css/style.css "rel="stylesheet">
+  <link href="../../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="../../../assets/css/bootstrap.css" rel="stylesheet">
+	<link href="../../../assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../../../assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -68,7 +66,7 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="/ppw/backend/index.php">
+        <a class="nav-link " href="/ppw/backend/index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -83,7 +81,7 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="index_admin.php ">
+        <a class="nav-link " href="/ppw/backend/admin/index_admin.php">
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
@@ -92,7 +90,7 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-leaf"></i>
           <span>Wisata</span>
         </a>
@@ -117,7 +115,7 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link disabled" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pages</span>
         </a>
@@ -137,14 +135,14 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link disabled" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link disabled" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li>
@@ -167,19 +165,9 @@ if (isset($_POST["cari"])) {
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top ">
 
-          <!-- Topbar Search -->
-          <form action="" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="submit" name="cari">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+          <!-- Sidebar Toggle (Topbar) -->
 
 
 
@@ -187,25 +175,6 @@ if (isset($_POST["cari"])) {
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -240,66 +209,55 @@ if (isset($_POST["cari"])) {
 
         </nav>
         <!-- End of Topbar -->
-        <div class="breadcrumb">
-  					<li class="breadcrumb-item" aria-current="active">Admin</li>
-  			</div>
+
+				<div class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Update Data</li>
+				</div>
+
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Data Admin</h1>
+            <h1 class="h3 mb-0 text-gray-800">Tambah Data</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"></a> -->
           </div>
        </div>
        <div class="container-fluid">
-         <div class="admin">
-           <a href="addadmin.php">Tambah Data</a>
-         <br><br>
-         <!-- ini halaman!!! -->
-         <?php if($halaktif > 1 ) : ?>
-          <a href="?halaman=<?= $halaktif - 1; ?>">&laquo;</a>
-         <?php endif; ?>
+         <div class="addkategori">
+					 <form action="" method="post" enctype="multipart/form-data">
+					 	<div class="row">
+							<div class="col-md-6">
 
-          <?php for ($i = 1; $i <= $jumlahhalaman; $i++) : ?>
-            <?php if ( $i == $halaktif ) : ?>
-            <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: red;"><?= $i ?></a>
-            <?php else : ?>
-              <a href="?halaman=<?= $i; ?>"><?= $i ?></a>
-            <?php endif ?>
-          <?php endfor; ?>
-<?php if($halaktif < $jumlahhalaman ) : ?>
-          <a href="?halaman=<?= $halaktif + 1; ?>">&raquo;</a>
-         <?php endif; ?>
+                <div class="">
+                  <div class="form-group">
+									   <label for="nama_kategori">Nama Kategori :</label>
+									   <input class="form-control" type="varchar" name="nama_kategori" id="nama_kategori" required>
+								   </div>
+                </div>
+                <div class="form-group">
+                  <label for="definisi">Definisi :</label>
+                  <textarea class="form-control" type="varchar" name="deskripsi_kategori" id="definisi" required></textarea>
+                </div>
 
-          <br><br>
+                <div class="form-group">
+                  <label for="foto">Foto :</label>
+                  <input class="form-control-file" type="file" name="foto_kategori" id="foto">
+                </div>
 
-           	<table border="1" cellpadding="8" class="center" >
-           		<tr>
-           			<th>No</th>
-           			<th>Username</th>
-           			<th>Hak Akses</th>
-           			<th>Nama</th>
-           			<th>Aksi</th>
-           		</tr>
-           		<?php $i = 1; ?>
-           		<?php foreach ($user as $row) :	?>
+							<br>
 
-           		<tr>
-           			<td><?= $i; ?></td>
-           			<td><?= $row["username"]  ?></td>
-           			<td><?= $row["hak_akses"]  ?></td>
-           			<td><?= $row["nama"]  ?></td>
-           			<td>
+					 		<div class="col-md-">
+								<button type="submit" class="btn btn-primary" name="submit">Simpan Data</button>
+					 			<button type="Cancel" class="btn btn-secondary">Batal</button>
+					 		</div>
 
-                  <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-primary">Edit</button></a>
-                  <a href="deleteadmin.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
-           			</td>
-           		</tr>
-           	<?php $i++; ?>
-           	<?php endforeach; ?>
-           	</table>
-
+							<br><br>
+							</div>
+					 	</div>
+						</div>
+					 </form>
          </div>
        </div>
     </div>
@@ -326,29 +284,28 @@ if (isset($_POST["cari"])) {
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="../logout.php">Logout</a>
+          <a class="btn btn-primary" href="../../logout.php">Logout</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../../assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../../assets/js/sb-admin-2.min.js"></script>
-  <script src="../../assets/js/jquery.js"></script>
+  <script src="../../../assets/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
+  <script src="../../../assets/vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../../assets/js/demo/chart-area-demo.js"></script>
-  <script src="../../assets/js/demo/chart-pie-demo.js"></script>
+  <script src="../../../assets/js/demo/chart-area-demo.js"></script>
+  <script src="../../../assets/js/demo/chart-pie-demo.js"></script>
 
 </body>
 
