@@ -24,20 +24,20 @@ function query($query){
 	$email = htmlspecialchars($data["email"]);
 
 
-	$query = "INSERT INTO user
-			VALUES
-			('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
+	$query = "INSERT INTO user VALUES	('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
 				";
-				var_dump($query);
-	//mysqli_query($conn, $query);
 
-	return mysqli_affected_rows($conn);
+
+mysqli_query($conn,$query);
+
+
+return mysqli_affected_rows($conn);
 
 
  }
 
 
- function hapus($id_user){
+ function delete($id_user){
  	global $conn;
  	mysqli_query($conn, "DELETE FROM user WHERE id_user = $id_user");
  }
@@ -71,5 +71,37 @@ global $conn;
 
 	return mysqli_affected_rows($conn);
  	}
+function addw($data){
+ 	global $conn;
 
+ 	$nama_wisata = strtolower(stripslashes($data["nama_wisata"]));
+	$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
+	$harga = htmlspecialchars($data["harga"]);
+	$jarak = htmlspecialchars($data["jarak"]);
+
+	$tikor_wisata = htmlspecialchars($data["tikor_wisata"]);
+	$fasilitas = htmlspecialchars($data["fasilitas"]);
+	$kategori = $data["kategori"];
+
+
+	$query = "INSERT INTO wisata
+			VALUES
+			('$nama_wisata', '$alamat_wisata', '$harga', '$jarak', '$tikor_wisata', '$fasilitas', '$kategori')
+				";
+				var_dump($query);
+	//mysqli_query($conn, $query);
+
+	return mysqli_affected_rows($conn);
+
+
+ }
+
+function cari($keyword){
+	$query = "SELECT * FROM user
+		WHERE
+		username LIKE '%$keyword%' OR
+		nama LIKE '%$keyword%'
+		";
+	return query($query);
+}
  ?>

@@ -1,14 +1,33 @@
-<!DOCTYPE html>
 <?php
-
 session_start();
-require 'functions.php';
+require '../functions.php';
 //
- if (!$_SESSION["hak_akses"]=="superadmin") {
-   header("Location:login.php");
- }
- ?>
+if ($_SESSION["hak_akses"]=="") {
+	header("Location:../login.php");
+}
 
+//cek submit
+if (isset($_POST["submit"]) ) {
+	//cek keberhasilan
+	if (add($_POST) > 0 ) {
+		echo "
+			<script>
+				alert('Successed To Input');
+				document.location.href = 'index_admin.php';
+			</script>
+		";
+	}else{
+		echo "
+			<script>
+				alert('Failed To Input');
+				document.location.href = 'index_admin.php';
+			</script>
+		";
+	}
+
+}
+ ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,10 +40,11 @@ require 'functions.php';
 
   <title>Buwung Puyuh</title>
 
-  <!-- Custom fonts for this template-->
-  <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="../../assets/css/bootstrap.css" rel="stylesheet">
+	<link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../../assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -37,7 +57,7 @@ require 'functions.php';
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/ppw/backend/index.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -48,8 +68,8 @@ require 'functions.php';
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">
+      <li class="nav-item">
+        <a class="nav-link " href="/ppw/backend/index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -63,8 +83,8 @@ require 'functions.php';
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="admin/index_admin.php">
+      <li class="nav-item active">
+        <a class="nav-link " href="/ppw/backend/admin/index_admin.php">
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
@@ -73,7 +93,7 @@ require 'functions.php';
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-leaf"></i>
           <span>Wisata</span>
         </a>
@@ -98,7 +118,7 @@ require 'functions.php';
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link disabled" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pages</span>
         </a>
@@ -118,14 +138,14 @@ require 'functions.php';
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link disabled" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link disabled" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li>
@@ -148,48 +168,16 @@ require 'functions.php';
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top ">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -225,18 +213,90 @@ require 'functions.php';
         </nav>
         <!-- End of Topbar -->
 
+				<div class="breadcrumb">
+						<li class="breadcrumb-item"><a href="index_admin.php">Admin</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Update Data</li>
+				</div>
+
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">Tambah Data</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"></a> -->
           </div>
        </div>
        <div class="container-fluid">
-         <div class="dashboard">
-           Aing gatau disini isinya apaan
+         <div class="addadmin">
+					 <form action="" method="post">
+					 	<div class="row">
+							<div class="col-md-6">
+
+								<div class="form-group">
+									<label for="username">Username :</label>
+									<input class="form-control" type="varchar" name="username" id="username" required>
+								</div>
+
+								<div class="form-group">
+									<label for="password">Password :</label>
+									<input class="form-control" type="password" name="password" id="password" required>
+								</div>
+
+					 			<div class="form-group">
+									<label for="hak_akses">Hak Akses :</label>
+					 				<select class="form-control" name="hak_akses" id="hak_akses" required>
+					 					<option value="">Pilih</option>
+					 					<option value="superadmin">Super Admin</option>
+					 					<option value="admin">Admin</option>
+					 				</select>
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="nama">Nama :</label>
+					 			<input class="form-control" type="varchar" name="nama" id="nama" required>
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="jk">Jenis Kelamin :</label>
+					 			<select class="form-control" name="jk" id="jk" required>
+					 				<option value="">Pilih</option>
+					 				<option value="laki-laki">Laki-laki</option>
+					 				<option value="perempuan">Perempuan</option>
+					 			</select>
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="tanggal_lahir">Tanggal Lahir :</label>
+					 			<input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" required>
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="alamat">Alamat :</label>
+					 			<input class="form-control" type="text" name="alamat" required>
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="no_hp">No Hp :</label>
+					 			<input class="form-control" type="varchar" name="no_hp" id="no_hp" required>
+					 		</div>
+
+					 		<div class="form-group">
+					 			<label for="email">Email :</label>
+					 			<input class="form-control" type="varchar" name="email" id="email" required>
+					 		</div>
+							<br>
+
+					 		<div class="col-md-">
+								<button type="submit" class="btn btn-primary" name="submit">Simpan Data</button>
+					 			<button type="Cancel" class="btn btn-secondary">Batal</button>
+					 		</div>
+
+							<br><br>
+							</div>
+					 	</div>
+						</div>
+					 </form>
          </div>
        </div>
     </div>
@@ -270,21 +330,21 @@ require 'functions.php';
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../assets/js/sb-admin-2.min.js"></script>
+  <script src="../../assets/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="../assets/vendor/chart.js/Chart.min.js"></script>
+  <script src="../../assets/vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../assets/js/demo/chart-area-demo.js"></script>
-  <script src="../assets/js/demo/chart-pie-demo.js"></script>
+  <script src="../../assets/js/demo/chart-area-demo.js"></script>
+  <script src="../../assets/js/demo/chart-pie-demo.js"></script>
 
 </body>
 
