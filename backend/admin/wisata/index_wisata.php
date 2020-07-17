@@ -42,7 +42,7 @@ $kategori = query("SELECT * FROM kategori");
      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
        <!-- Sidebar - Brand -->
-       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
+       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/ppw/backend/index.php">
          <div class="sidebar-brand-icon rotate-n-15">
            <i class="fas fa-laugh-wink"></i>
          </div>
@@ -61,6 +61,8 @@ $kategori = query("SELECT * FROM kategori");
 
        <!-- Divider -->
        <hr class="sidebar-divider">
+
+       <!-- Heading -->
        <div class="sidebar-heading">
          Data
        </div>
@@ -72,15 +74,15 @@ $kategori = query("SELECT * FROM kategori");
          </a>
        </li>
 
-       <li class="nav-item">
-         <a class="nav-link collapsed" href="../wisata/index_wisata.php">
+     <li class="nav-item active">
+         <a class="nav-link collapsed" href="index_wisata.php">
            <i class="fas fa-fw fa-leaf"></i>
            <span>Wisata</span>
          </a>
        </li>
 
-       <li class="nav-item active">
-         <a class="nav-link collapsed" href="index_kategori.php ">
+       <li class="nav-item">
+         <a class="nav-link collapsed" href="../kategori/index_kategori.php ">
            <i class="fas fa-fw fa-database"></i>
            <span>Kategori</span>
          </a>
@@ -236,35 +238,8 @@ $kategori = query("SELECT * FROM kategori");
             <a href="addkategori.php">Tambah Kategori</a>
           <br><br>
 
-          <?php foreach ($kategori as $row) :
 
-            $nama_kategori = $row ["nama_kategori"];
-            $deskripsi_kategori = $row ["deskripsi_kategori"];
-
-            if (strlen($nama_kategori) > 10) {
-              $nama_kategori = substr($nama_kategori, 0, 10) . "...";
-            }
-            $deskripsi_kategori = $row["deskripsi_kategori"];
-            if (strlen($deskripsi_kategori) > 30  ) {
-              $deskripsi_kategori = substr($deskripsi_kategori, 0, 30) . "...";
-            }
-?>
-
-
-
-
-
-           <br><br>
-           <div class="">
-             <div class="card col-xl-6 col-lg-7">
-               <img src= "images/<?php echo $row['foto_kategori'] ?>" class="card-img-top" alt="gambar">
-                  <div class="card-body">
-                    <h5 class="card-title"><?= $row["nama_kategori"]; ?></h5>
-                    <p class="card-text"><?= $row ["deskripsi_kategori"]; ?></p>
-                  </div>
-               </div>
-           </div>
-         <?php endforeach; ?>
+          INI ISINYA
 
 
 

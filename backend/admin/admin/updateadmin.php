@@ -45,7 +45,7 @@ if (isset ($_POST["submit"]) ) {
 
   <title>Buwung Puyuh</title>
 
-  <link href="../../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../../../assets/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="../../../assets/css/bootstrap.css" rel="stylesheet">
 	<link href="../../../assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../../assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -81,39 +81,31 @@ if (isset ($_POST["submit"]) ) {
           <span>Dashboard</span></a>
       </li>
 
-      <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
       <div class="sidebar-heading">
         Data
       </div>
+			<li class="nav-item active">
+				<a class="nav-link collapsed" href="index_admin.php ">
+					<i class="fas fa-fw fa-user-circle"></i>
+					<span>Admin</span>
+				</a>
+			</li>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
-        <a class="nav-link " href="/ppw/backend/admin/index_admin.php">
-          <i class="fas fa-fw fa-user-circle"></i>
-          <span>Admin</span>
-        </a>
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="../wisata/index_wisata.php">
+					<i class="fas fa-fw fa-leaf"></i>
+					<span>Wisata</span>
+				</a>
+			</li>
 
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-leaf"></i>
-          <span>Wisata</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="../kategori/index_kategori.php ">
+					<i class="fas fa-fw fa-database"></i>
+					<span>Kategori</span>
+				</a>
+			</li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">

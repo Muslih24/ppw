@@ -40,7 +40,7 @@ if (isset($_POST["cari"])) {
   <title>Buwung Puyuh</title>
 
   <!-- Custom fonts for this template-->
-  <link href="../../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../../../assets/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="../../../assets/css/sb-admin-2.min.css" rel="stylesheet">
   <link  href="../../../assets/css/style.css "rel="stylesheet">
@@ -56,7 +56,7 @@ if (isset($_POST["cari"])) {
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/ppw/backend/index.php">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -68,15 +68,12 @@ if (isset($_POST["cari"])) {
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="/ppw/backend/index.php">
+        <a class="nav-link" href="../../index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
 
-      <!-- Divider -->
       <hr class="sidebar-divider">
-
-      <!-- Heading -->
       <div class="sidebar-heading">
         Data
       </div>
@@ -87,24 +84,20 @@ if (isset($_POST["cari"])) {
           <i class="fas fa-fw fa-user-circle"></i>
           <span>Admin</span>
         </a>
-
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="../wisata/index_wisata.php">
           <i class="fas fa-fw fa-leaf"></i>
           <span>Wisata</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../kategori/index_kategori.php ">
+          <i class="fas fa-fw fa-database"></i>
+          <span>Kategori</span>
+        </a>
       </li>
 
       <!-- Divider -->

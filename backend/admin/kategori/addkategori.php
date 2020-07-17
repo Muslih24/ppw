@@ -37,7 +37,7 @@ if (isset($_POST["submit"])) {
 
   <title>Buwung Puyuh</title>
 
-  <link href="../../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../../../assets/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="../../../assets/css/bootstrap.css" rel="stylesheet">
 	<link href="../../../assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../../assets/css/sb-admin-2.min.css" rel="stylesheet">

@@ -19,7 +19,7 @@ if (isset($_POST["login"]) ) {
 	$username = $_POST["username"];
 	$password =  md5($_POST["password"]);
 
-	$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+	$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username' and password = '$password'");
 	$a = mysqli_num_rows($result);
 
 		if ($a > 0) {
@@ -42,38 +42,47 @@ if (isset($_POST["login"]) ) {
 			}
 
 		}else {
-			header("Location:login.php");
-		}
+			echo
+			"<script>
+					alert('Bodat');
+					document.location.href = 'login.php';
+				</script>";
+			}
+
+				//header("Location:login.php");
 
 }
  ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Halaman Login</title>
-</head>
-<body>
 
-<h1>Halaman Login</h1>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>::Login::</title>
+		<link rel="stylesheet" type="text/css" href="../assets/css/stylelogin.css">
+		<link rel="stylesheet" type="text/css" href="../assets/vendor/fontawesome/css/fontawesome.css">
+		<link rel="stylesheet" type="text/css" href="../assets/vendor/fontawesome/css/all.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="bg">
+			<div class="loginbox">
+				<h1>LOGIN</h1>
+				<form  action="" method="post">
 
-<form  action="" method="post">
+				<div class="textbox" style="color: #373737">
+					<i class="far fa-user"></i>
+					<input type="text" name="username" placeholder="Username">
+				</div>
 
-<ul>
-	<li>
-		<label for="username">Username :</label>
-		<input type="text" name="username" id="username">
-	</li>
-	<li>
-		<label for="password">Password :</label>
-		<input type="password" name="password" id="password">
-	</li>
-	<li>
-		<button type="submit" name="login">Login </button>
-	</li>
-</ul>
+				<div class="textbox" style="color: #373737">
+					<i class="fas fa-lock"></i>
+					<input type="Password" name="password" placeholder="Password">
+				</div>
 
+				<input type="submit" name="login" value="Login">
 
-</form>
-
-</body>
-</html>
+			</div>
+		</div>
+	</body>
+	</html>
