@@ -185,7 +185,7 @@ $wisata = query("SELECT * FROM kategori,wisata where kategori.id_kategori = wisa
         </div>
         <div class="container-fluid">
           <div class="admin">
-            <a href="addkategori.php">Tambah Wisata</a>
+            <a href="addkategori.php" class="btn btn-success">Tambah Wisata</a>
           <br><br>
           <table border="1" cellpadding="5">
                <tr>

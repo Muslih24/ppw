@@ -17,10 +17,9 @@ function query($query){
 	$password = md5($data["password"]);
 	$hak_akses = $data["hak_akses"];
 	$nama = htmlspecialchars($data["nama"]);
-	$no_hp = htmlspecialchars($data["no_hp"]);
 
 
-	$query = "INSERT INTO user VALUES	('', '$username', '$password', '$hak_akses', '$nama','$no_hp')
+	$query = "INSERT INTO user VALUES	('', '$username', '$password', '$hak_akses', '$nama')
 				";
 
 
@@ -63,12 +62,11 @@ global $conn;
 	$password = htmlspecialchars($data["password"]);
 	$hak_akses = $data["hak_akses"];
 	$nama = htmlspecialchars($data["nama"]);
-	$no_hp = htmlspecialchars($data["no_hp"]);
 	$query = mysqli_query($conn, "UPDATE user SET
 			username = '$username',
 			password = md5('$password'),
-			hak_akses = '$hak_akses',
-			no_hp = '$no_hp'
+			nama = '$nama',
+			hak_akses = '$hak_akses'
 			WHERE id_user = $id_user");
 
 
@@ -129,11 +127,30 @@ global $conn;
 			return false;
 		}
 
-		move_uploaded_file($tmpName, '../../../assets/img/images/kategori' .$namaBaru);
+		move_uploaded_file($tmpName, '../../../assets/img/images/kategori/' .$namaBaru);
 
 		return $namaBaru;
 
 	}
+
+	//  function deletek($id_kategori){
+	//  	global $conn;
+	// if($hapus){
+	// 		echo "
+	// 			<script>
+	// 				alert('Successed To Delete');
+	// 				document.location.href = 'index_kategori.php';
+	// 			</script>
+	// 		";
+	// 	}else{
+	// 		echo "
+	// 			<script>
+	// 			alert('Failed To Delete');
+	// 				document.location.href = 'index_kategori.php';
+	// 			</script>
+	// 		";
+	// 	}
+	// 	}
 
 
 function addw($data){
@@ -153,9 +170,8 @@ function addw($data){
 	//mysqli_query($conn, $query);
 
 	return mysqli_affected_rows($conn);
-
-
  }
+
 
 function cari($keyword){
 	$query = "SELECT * FROM user

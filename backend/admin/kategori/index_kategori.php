@@ -7,15 +7,7 @@ if (!$_SESSION["hak_akses"]=="superadmin") {
 }
 
 $kategori = query("SELECT * FROM kategori");
-
-$id_user = $_SESSION["username"];
-//var_dump($id_user);die;
-
-$admin = mysqli_query($conn,"SELECT * FROM user where id_user = $id_user")[0];
-
-
-
- ?>
+?>
 
 
  <!DOCTYPE html>
@@ -160,7 +152,7 @@ $admin = mysqli_query($conn,"SELECT * FROM user where id_user = $id_user")[0];
            </div>
          </div>
         <div class="container-fluid">
-            <a href="addkategori.php">Tambah Kategori</a>
+            <a href="addkategori.php"><button type="button" class="btn btn-success">Tambah Kategori</button></a>
           <br><br>
       	   <table border="1" cellpadding="5" style="attachment:fixed;">
             		<tr>
@@ -177,9 +169,9 @@ $admin = mysqli_query($conn,"SELECT * FROM user where id_user = $id_user")[0];
             			<td style="width:65%"><?= $row["deskripsi_kategori"]  ?></td>
             			<td style="width:20%">
 
-                    <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-info">Lihat</button></a>
-                   <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-primary">Edit</button></a>
-                   <a href="deleteadmin.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
+                   <a href="detailkategori.php?id_kategori=<?= $row["id_kategori"]  ?>">  <button class="btn btn-info">Lihat</button></a>
+                   <a href="updatekategori.php?id_kategori=<?= $row["id_kategori"]  ?>">  <button class="btn btn-primary">Edit</button></a>
+                   <a href="deletekategori.php?id_kategori=<?= $row["id_kategori"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
             			</td>
             		</tr>
             	   <?php $i++; ?>

@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION["login"])) {
 	// code...
 	if(($_SESSION["hak_akses"]=="superadmin")) {
-		header("Location:index.php");
+		header("Location:admin/admin/index_admin.php");
 	}elseif(($_SESSION["hak_akses"]=="admin")) {
 		header("Location:cekin/wisata.php");
 	}else {

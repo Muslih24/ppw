@@ -159,8 +159,8 @@ if (isset($_POST["cari"])) {
           </div>
        </div>
        <div class="container-fluid">
-         <div class="admin">
-           <a href="addadmin.php">Tambah Data</a>
+        <a href="addadmin.php"><button type="button" class="btn btn-success">Tambah Data</button></a>
+
          <br><br>
            	<table border="1" cellpadding="8" class="center" >
            		<tr>
@@ -175,12 +175,13 @@ if (isset($_POST["cari"])) {
 
            		<tr>
            			<td style="width:5%"><?= $i; ?></td>
-           			<td style="width:20%"><?= $row["username"]  ?></td>
-           			<td style="width:20%"><?= $row["hak_akses"]  ?></td>
+           			<td style="width:20%"><?= $row["username"]?></td>
+           			<td style="width:20%"><?= $row["hak_akses"]?></td>
            			<td style="width:25%"><?= $row["nama"]  ?></td>
            			<td style="width:30%">
 
-                  <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-primary">Edit</button></a>
+                  <a href="detailadmin.php?id_user=<?= $row["id_user"]  ?>"><button class="btn btn-info">Lihat</button></a>
+                  <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>"><button class="btn btn-primary">Edit</button></a>
                   <a href="deleteadmin.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
            			</td>
            		</tr>
