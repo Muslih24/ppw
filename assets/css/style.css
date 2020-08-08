@@ -7,3 +7,88 @@ table.center{
   margin-left: auto;
   margin-right: auto;
 }
+.post-body {
+    position: relative;
+}
+/*
+body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  poition: relative;
+  width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.container .box{
+  position: relative;
+  width: 280px;
+  height: 400px;
+  margin: 20px 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.container .box .imgBx{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: circle(400px at center 100px);
+  transition: 0.5s;
+}
+
+.container .box:hover .imgBx{
+  clip-path: circle(80px at center 100px);
+}
+
+.container .box:hover .imgBx img{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height:100%;
+  object-fit: cover;
+}
+
+.container .box .content{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height:55%;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.container .box .content h2{
+  margin: 0px;
+  padding: 0px;
+}
+
+.container .box .content a{
+  text-decoration: none;
+  background: #000;
+  color: #fff;
+  padding: 5px;
+  display: inline-block;
+}
+
+.container .box .content h2,
+.container .box .content p,
+.container .box .content a
+{
+  opacity:  0;
+  transition: 0.5s;
+  transform:translateY(20px);
+} */

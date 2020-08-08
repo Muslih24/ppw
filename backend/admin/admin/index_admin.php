@@ -6,19 +6,8 @@ if (!$_SESSION["hak_akses"]=="superadmin") {
   header("Location:../../login.php");
 }
 
-//pagination
-//konfigurasi
-$jumlahuserperhalaman = 5;
-//hitung jmlh data
-$jumlahdata = count(query('SELECT * FROM user'));
-$jumlahhalaman = ceil($jumlahdata / $jumlahuserperhalaman);
-$halaktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
-//halaman = 2, awalData = 5
-//halaman = 3, awalData = 10
-$awalData = ($jumlahuserperhalaman*$halaktif) - $jumlahuserperhalaman;
 
-
-$user = query("SELECT * FROM user LIMIT $awalData, $jumlahuserperhalaman");
+ $user = query("SELECT * FROM user ");
 
 if (isset($_POST["cari"])) {
   $user = cari($_POST["keyword"]);
@@ -37,7 +26,10 @@ if (isset($_POST["cari"])) {
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Buwung Puyuh</title>
+
+  <link rel="icon" type="image/png" href="../../../assets/img/logo/Logo7.png">
+  <title>Seven Journey</title>
+
 
   <!-- Custom fonts for this template-->
   <link href="../../../assets/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
@@ -56,22 +48,15 @@ if (isset($_POST["cari"])) {
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index_admin.php">
+        <div class="sidebar-brand-icon">
+          <img src="../../../assets/img/logo/Logo7.png" width="60px">
         </div>
-        <div class="sidebar-brand-text mx-3">Buwung Puyuh<sup> 4</sup></div>
+        <div class="sidebar-brand-text mx-3">Seven Journey<sup>7</sup></div>
       </a>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="../../index.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
 
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
@@ -102,48 +87,6 @@ if (isset($_POST["cari"])) {
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
@@ -176,7 +119,6 @@ if (isset($_POST["cari"])) {
 
 
 
-          <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -198,38 +140,10 @@ if (isset($_POST["cari"])) {
                 </form>
               </div>
             </li>
-
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Buwung Puyuh</span>
-                <!-- <img class="img-profile rounded-circle" src=""> -->
-                <i class="fas fa-fw fa-user-circle"></i>
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <a href="#" type="button" class="btn btn-danger" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
-              </div>
-            </li>
-
-          </ul>
+              </ul>
 
         </nav>
         <!-- End of Topbar -->
@@ -238,7 +152,6 @@ if (isset($_POST["cari"])) {
   			</div>
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Data Admin</h1>
@@ -249,41 +162,23 @@ if (isset($_POST["cari"])) {
          <div class="admin">
            <a href="addadmin.php">Tambah Data</a>
          <br><br>
-         <!-- ini halaman!!! -->
-         <?php if($halaktif > 1 ) : ?>
-          <a href="?halaman=<?= $halaktif - 1; ?>">&laquo;</a>
-         <?php endif; ?>
-
-          <?php for ($i = 1; $i <= $jumlahhalaman; $i++) : ?>
-            <?php if ( $i == $halaktif ) : ?>
-            <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: red;"><?= $i ?></a>
-            <?php else : ?>
-              <a href="?halaman=<?= $i; ?>"><?= $i ?></a>
-            <?php endif ?>
-          <?php endfor; ?>
-<?php if($halaktif < $jumlahhalaman ) : ?>
-          <a href="?halaman=<?= $halaktif + 1; ?>">&raquo;</a>
-         <?php endif; ?>
-
-          <br><br>
-
            	<table border="1" cellpadding="8" class="center" >
            		<tr>
            			<th>No</th>
            			<th>Username</th>
            			<th>Hak Akses</th>
-           			<th>Nama</th>
+                <th>Nama</th>
            			<th>Aksi</th>
            		</tr>
            		<?php $i = 1; ?>
            		<?php foreach ($user as $row) :	?>
 
            		<tr>
-           			<td><?= $i; ?></td>
-           			<td><?= $row["username"]  ?></td>
-           			<td><?= $row["hak_akses"]  ?></td>
-           			<td><?= $row["nama"]  ?></td>
-           			<td>
+           			<td style="width:5%"><?= $i; ?></td>
+           			<td style="width:20%"><?= $row["username"]  ?></td>
+           			<td style="width:20%"><?= $row["hak_akses"]  ?></td>
+           			<td style="width:25%"><?= $row["nama"]  ?></td>
+           			<td style="width:30%">
 
                   <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-primary">Edit</button></a>
                   <a href="deleteadmin.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
@@ -292,7 +187,7 @@ if (isset($_POST["cari"])) {
            	<?php $i++; ?>
            	<?php endforeach; ?>
            	</table>
-
+          <br><br>
          </div>
        </div>
     </div>

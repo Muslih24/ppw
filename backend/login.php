@@ -15,7 +15,6 @@ if (isset($_SESSION["login"])) {
 	require 'functions.php';
 
 if (isset($_POST["login"]) ) {
-
 	$username = $_POST["username"];
 	$password =  md5($_POST["password"]);
 
@@ -29,7 +28,11 @@ if (isset($_POST["login"]) ) {
 				$_SESSION["username"] = $username ;
 				$_SESSION["hak_akses"] = "superadmin" ;
 				$_SESSION["login"] = true ;
-				header("Location:index.php");
+				echo "<script>
+					alert('YEYYYY');
+					document.location.href = 'admin/admin/index_admin.php';
+					</script>
+				";
 				//echo "superadmin";
 			}elseif ($row["hak_akses"]=="admin") {
 				$_SESSION["username"] = $username;
@@ -44,7 +47,7 @@ if (isset($_POST["login"]) ) {
 		}else {
 			echo
 			"<script>
-					alert('Bodat');
+					alert('Username dan Password Salah');
 					document.location.href = 'login.php';
 				</script>";
 			}
@@ -57,6 +60,7 @@ if (isset($_POST["login"]) ) {
 	<!DOCTYPE html>
 	<html>
 	<head>
+
 		<title>::Login::</title>
 		<link rel="stylesheet" type="text/css" href="../assets/css/stylelogin.css">
 		<link rel="stylesheet" type="text/css" href="../assets/vendor/fontawesome/css/fontawesome.css">
@@ -72,6 +76,7 @@ if (isset($_POST["login"]) ) {
 
 				<div class="textbox" style="color: #373737">
 					<i class="far fa-user"></i>
+					<input type="hidden" name="id_user">
 					<input type="text" name="username" placeholder="Username">
 				</div>
 

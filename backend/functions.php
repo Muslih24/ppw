@@ -17,14 +17,10 @@ function query($query){
 	$password = md5($data["password"]);
 	$hak_akses = $data["hak_akses"];
 	$nama = htmlspecialchars($data["nama"]);
-	$jk = $data["jk"];
-	$tanggal_lahir = $data["tanggal_lahir"];
-	$alamat = htmlspecialchars($data["alamat"]);
 	$no_hp = htmlspecialchars($data["no_hp"]);
-	$email = htmlspecialchars($data["email"]);
 
 
-	$query = "INSERT INTO user VALUES	('', '$username', '$password', '$hak_akses', '$nama', '$jk', '$tanggal_lahir', '$alamat', '$no_hp', '$email')
+	$query = "INSERT INTO user VALUES	('', '$username', '$password', '$hak_akses', '$nama','$no_hp')
 				";
 
 
@@ -39,8 +35,24 @@ return mysqli_affected_rows($conn);
 
  function delete($id_user){
  	global $conn;
- 	mysqli_query($conn, "DELETE FROM user WHERE id_user = $id_user");
- }
+ 	$delete = mysqli_query($conn, "DELETE FROM user WHERE id_user = $id_user");
+	if($delete){
+		echo "
+			<script>
+				alert('Successed To Delete');
+				document.location.href = 'index_admin.php';
+			</script>
+		";
+	}else{
+		echo "
+			<script>
+			alert('Failed To Delete');
+				document.location.href = 'index_admin.php';
+			</script>
+		";
+	}
+	}
+
 
 
 function update($data){
@@ -51,21 +63,12 @@ global $conn;
 	$password = htmlspecialchars($data["password"]);
 	$hak_akses = $data["hak_akses"];
 	$nama = htmlspecialchars($data["nama"]);
-	$jk = $data["jk"];
-	$tanggal_lahir = $data["tanggal_lahir"];
-	$alamat = htmlspecialchars($data["alamat"]);
 	$no_hp = htmlspecialchars($data["no_hp"]);
-	$email = htmlspecialchars($data["email"]);
 	$query = mysqli_query($conn, "UPDATE user SET
 			username = '$username',
 			password = md5('$password'),
 			hak_akses = '$hak_akses',
-			nama = '$nama',
-			jk = '$jk',
-			tanggal_lahir = '$tanggal_lahir',
-			alamat = '$alamat',
-			no_hp = '$no_hp',
-			email = '$email'
+			no_hp = '$no_hp'
 			WHERE id_user = $id_user");
 
 
@@ -111,7 +114,7 @@ global $conn;
 		$namaBaru .= '.';
 		$namaBaru .= $eksgambar;
 
-		var_dump($namaBaru);die;
+		//var_dump($namaBaru);die;
 		if (!in_array($eksgambar, $eksgambarvalid)) {
 			echo "<script>
 			alert('Bukan gambar itu teh');
@@ -126,7 +129,7 @@ global $conn;
 			return false;
 		}
 
-		move_uploaded_file($tmpName, 'images/' .$namaBaru);
+		move_uploaded_file($tmpName, '../../../assets/img/images/kategori' .$namaBaru);
 
 		return $namaBaru;
 
