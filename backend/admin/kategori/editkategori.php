@@ -11,7 +11,7 @@ $id_kategori = $_GET["id_kategori"];
 $user = query("SELECT * FROM kategori WHERE id_kategori = $id_kategori")[0];
 
 if (isset($_POST["submit"])) {
-  if (addk($_POST) > 0) {
+  if (edit($_POST) > 0) {
     echo "<script>
     alert ('Successed To Input');
     document.location.href = 'index_kategori.php';
