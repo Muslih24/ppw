@@ -154,44 +154,87 @@ global $conn;
 
 	}
 
-	//  function deletek($id_kategori){
-	//  	global $conn;
-	// if($hapus){
-	// 		echo "
-	// 			<script>
-	// 				alert('Successed To Delete');
-	// 				document.location.href = 'index_kategori.php';
-	// 			</script>
-	// 		";
-	// 	}else{
-	// 		echo "
-	// 			<script>
-	// 			alert('Failed To Delete');
-	// 				document.location.href = 'index_kategori.php';
-	// 			</script>
-	// 		";
-	// 	}
-	// 	}
+	 function deletek($id_kategori){
+	 	global $conn;
+	if($hapus){
+			echo "
+				<script>
+					alert('Successed To Delete');
+					document.location.href = 'index_kategori.php';
+				</script>
+			";
+		}else{
+			echo "
+				<script>
+				alert('Failed To Delete');
+					document.location.href = 'index_kategori.php';
+				</script>
+			";
+		}
+		}
 
 
 function addw($data){
- 	global $conn;
+		global $conn;
 
- 	$nama_wisata = strtolower(stripslashes($data["nama_wisata"]));
-	$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
-	$harga = htmlspecialchars($data["harga"]);
-	$jarak = htmlspecialchars($data["jarak"]);
-	$tikor_wisata = htmlspecialchars($data["tikor_wisata"]);
-	$fasilitas = htmlspecialchars($data["fasilitas"]);
+		$nama_wisata = strtolower(stripslashes($data["nama_wisata"]));
+	 	$id_kategori = strtolower(stripslashes($data["id_kategori"]));
+		$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
+		$harga = htmlspecialchars($data["harga"]);
+		$fasilitas = htmlspecialchars($data["fasilitas"]);
 
+		$lampiran = upload();
+			if (!$lampiran) {
+				return false;
+			}
+			$query = "INSERT INTO wisata VALUES	('$nama_wisata', '$id_kategori','$alamat_wisata', '$harga', '$fasilitas')
+							";
 
-	$query = "INSERT INTO wisata	VALUES	('$nama_wisata', '$alamat_wisata', '$harga', '$jarak', '$tikor_wisata', '$fasilitas', '$kategori')
-				";
-				var_dump($query);
-	//mysqli_query($conn, $query);
+		mysqli_query($conn,$query);
 
-	return mysqli_affected_rows($conn);
- }
+		return mysqli_affected_rows($conn);
+	}
+
+	function uploadw(){
+		$namaFile = $_FILES["foto_kategori"]["name"];
+		$ukuranFile = $_FILES["foto_kategori"]["size"];
+		$error = $_FILES["foto_kategori"]["error"];
+		$tmpName = $_FILES["foto_kategori"]["tmp_name"];
+		$eksgambarvalid = ['jpg','jpeg','png'];
+
+		if ($error === 4) {
+			echo "<script>
+			alert('Pilih gambar bang');
+			</script>";
+			return false;
+		}
+
+		$eksgambar = explode('.', $namaFile);
+		$eksgambar = strtolower(end($eksgambar));
+		$namaBaru = date("YmdHis");
+		$namaBaru .= '.';
+		$namaBaru .= $eksgambar;
+
+		//var_dump($namaBaru);die;
+		if (!in_array($eksgambar, $eksgambarvalid)) {
+			echo "<script>
+			alert('Bukan gambar itu teh');
+			</script>";
+			return false;
+		}
+
+		if ($ukuranFile > 3000000) {
+			echo "<script>
+			alert('Ukurannya kebesaran');
+			</script>";
+			return false;
+		}
+
+		move_uploaded_file($tmpName, '../../../assets/img/images/kategori/' .$namaBaru);
+
+		return $namaBaru;
+
+	}
 
 
 function cari($keyword){
@@ -201,5 +244,6 @@ function cari($keyword){
 		nama LIKE '%$keyword%'
 		";
 	return query($query);
-}
+	}
+
  ?>
