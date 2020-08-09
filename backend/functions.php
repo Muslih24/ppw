@@ -91,6 +91,27 @@ global $conn;
 
 		return mysqli_affected_rows($conn);
 	}
+	function edit($data){
+		global $conn;
+
+		$nama_kategori = htmlspecialchars($data["nama_kategori"]);
+		$deskripsi_kategori = htmlspecialchars($data["deskripsi_kategori"]);
+
+		$foto_kategori = upload();
+			if (!$foto_kategori) {
+				return false;
+			}
+		$query = "UPDATE kategori SET(
+		'',
+		nama_kategori ='$nama_kategori',
+		deskripsi_kategori='$deskripsi_kategori',
+		foto_kategori ='$foto_kategori')";
+
+
+		mysqli_query($conn,$query);
+
+		return mysqli_affected_rows($conn);
+	}
 
 	function upload(){
 		$namaFile = $_FILES["foto_kategori"]["name"];
@@ -127,7 +148,7 @@ global $conn;
 			return false;
 		}
 
-		move_uploaded_file($tmpName, '../../../assets/img/images/kategori/' .$namaBaru);
+		move_uploaded_file($tmpName, '../../../assets/img/kategori/' .$namaBaru);
 
 		return $namaBaru;
 
