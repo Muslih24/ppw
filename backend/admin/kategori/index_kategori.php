@@ -170,7 +170,7 @@ $kategori = query("SELECT * FROM kategori");
             			<td style="width:20%">
 
                    <a href="detailkategori.php?id_kategori=<?= $row["id_kategori"]  ?>">  <button class="btn btn-info">Lihat</button></a>
-                   <a href="updatekategori.php?id_kategori=<?= $row["id_kategori"]  ?>">  <button class="btn btn-primary">Edit</button></a>
+                   <a href="editkategori.php?id_kategori=<?= $row["id_kategori"]  ?>">  <button class="btn btn-primary">Edit</button></a>
                    <a href="deletekategori.php?id_kategori=<?= $row["id_kategori"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
             			</td>
             		</tr>
