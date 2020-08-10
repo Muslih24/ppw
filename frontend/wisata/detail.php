@@ -2,11 +2,9 @@
 require '../../backend/functions.php';
 
 
-$id_kategori = $_GET["id_kategori"];
+$id_wisata = $_GET["id_wisata"];
 
-$wisata = mysqli_query($conn,"SELECT * FROM wisata WHERE id_kategori = '$id_kategori'");
-
-$a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id_kategori=wisata.id_kategori WHERE wisata.id_kategori = '$id_kategori'");
+$wisata = mysqli_query($conn,"SELECT * FROM wisata WHERE id_wisata = '$id_wisata'");
 
 
 ?>
@@ -27,7 +25,9 @@ $a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
     <link rel="stylesheet" href="../../assets/frontend/css/owl.carousel.min.css">
     <link rel="stylesheet" href="../../assets/frontend/css/owl.theme.default.min.css">
 
-    <link rel="stylesheet" href="../../assets/frontend/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../../assets/frontend/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="../../assets/frontend/font-awesome-4.7.0/css/font-awesome.min.css">
+
 
     <link rel="stylesheet" href="../../assets/frontend/fonts/flaticon/font/flaticon.css">
 
@@ -37,6 +37,7 @@ $a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
     <link rel="stylesheet" href="../../assets/frontend/css/aos.css">
 
     <link rel="stylesheet" href="../../assets/frontend/css/style.css">
+    <link rel="stylesheet" href="../../assets/frontend/css/stylecard.css">
 
   </head>
   <body>
@@ -78,61 +79,60 @@ $a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
         </div>
       </div>
     </header>
-    <div class="slide-one-item home-slider owl-carousel">
-      <?php while ($rows = mysqli_fetch_array($a)) { ?>
-      <div class="site-blocks-cover overlay" style="background-image: url(../../assets/frontend/images/view_1.jpg);">
-        <div class="container">
-          <div class="row align-items-center justify-content-center text-center">
-            <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
 
-              <h1 class="text-white font-weight-light"><?= $rows['nama_kategori'];?></h1>
-              <p class="mb-5" style="font-size: 18px;"><?= $rows['deskripsi_kategori'];?></p>
+
+    <section class="site-section pb-0"  id="section-services">
+      <div class="container">
+
+        <?php while ($a = mysqli_fetch_array($wisata)) {?>
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="section-heading text-center">
+              <h1><strong><?= $a['nama_wisata'];?></strong></h1>
             </div>
           </div>
         </div>
-      </div>
-    <?php }?>
-    </div>
+        <div class="row">
 
-
-    <div class="site-section block-13 bg-light">
-
-
-      <div class="site-section cta-big-image" id="about-section">
-        <div class="container">
-          <div class="row mb-5">
-
-          <?php while ($rows = mysqli_fetch_array($wisata)) { ?>
+          <div class="col-md-6 col-lg-4 text-center mb-5">
+            <div class="site-service-item site-animate" data-animate-effect="fadeIn">
+              <span class="icon">
+                <i class="fa fa-map-marker" style=" margin-top: 12px;font-size: 70px;"></i>
+              </span>
+              <h3 class="mb-4"><b>Alamat</b></h3>
+              <p><?= $a['alamat_wisata'];?></p>
+              <p></p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 text-center mb-5">
+            <div class="site-service-item site-animate" data-animate-effect="fadeIn">
+              <span class="icon">
+                <i class="fa fa-star" style=" margin-top: 15px;font-size: 70px;"></i>
+              </span>
+              <h3 class="mb-4"><b>Fasilitas</b></h3>
+              <p><?= $a['fasilitas'];?></p>
+              <p></p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 text-center mb-5">
+            <div class="site-service-item site-animate" data-animate-effect="fadeIn">
+              <span class="icon">
+                <i class="fa fa-money" style=" margin-top: 20px;font-size: 60px;"></i>
+              </span>
+              <h3 class="mb-4"><b>Harga</b></h3>
+              <p><?= $a['harga'];?></p>
+              <p></p>
+            </div>
           </div>
 
-          <div class="row" style="background-color:#dddddd;margin-bottom:20px">
-            <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="" style="margin-top:50px">
-              <figure class="circle-bg">
-                <?="<img src='../../assets/img/images/kategori/".$rows['lampiran']."'style='width:450px; height:300px; margin-left:100px';>"?>
-              </figure>
-            </div>
-            <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
-              <div class="mb-4" style="margin-top:50px">
-                <h3 class="h3 mb-4 text-black" style="font-size:30px"><?= $rows["nama_wisata"]?></h3>
-              </div>
-              <div class="mb-4">
-                <ul class="list-unstyled ul-check success" style="font-size:20px">
-                  <li>Harga &nbsp&nbsp&nbsp : <?= $rows["harga"]?></li>
-                  <li>Alamat &nbsp : <?= $rows["alamat_wisata"]?></li>
-                  <li><a href="detail.php?id_wisata=<?= $rows["id_wisata"]?>" class="btn btn-primary" style="border-radius:20px; height:40px; width:200px; margin-top:65px">Lihat</a></li>
-                </ul>
-              </div>
-            </div>
 
-          </section>
-          <?php } ?>
-          </div>
+
         </div>
+
+          <?php }  ?>
       </div>
-      </div>
 
-
-
+    </section>
 
     <footer class="site-footer">
         <div class="text-center">

@@ -236,9 +236,7 @@
       </div>
 
     </div>
-
-    <div class="site-section block-13 bg-light">
-
+    </div>
 
 
     <footer class="site-footer">
@@ -255,12 +253,6 @@
         </div>
       </div>
     </footer>
-  </div>
-
-        </div>
-      </div>
-    </footer>
-  </div>
 
   <script src="../assets/frontend/js/jquery-3.3.1.min.js"></script>
   <script src="../assets/frontend/js/jquery-migrate-3.0.1.min.js"></script>
