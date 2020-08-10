@@ -22,7 +22,7 @@ if (isset($_POST["submit"])) {
     ";
   }
 }
-$sql=mysqli_query("SELECT * FROM wisata INNER JOIN kategori ON kategori.id_kategori = wisata.id_kategori");
+$sql=mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id_kategori = wisata.id_kategori");
 
 ?>
 
