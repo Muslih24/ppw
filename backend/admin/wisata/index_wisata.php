@@ -188,7 +188,7 @@ $wisata = query("SELECT * FROM kategori,wisata where kategori.id_kategori = wisa
         </div>
         <div class="container-fluid">
           <div class="admin">
-            <a href="addkategori.php" class="btn btn-success">Tambah Wisata</a>
+            <a href="addwisata.php" class="btn btn-success">Tambah Wisata</a>
           <br><br>
           <table border="1" cellpadding="5">
                <tr>
@@ -213,7 +213,7 @@ $wisata = query("SELECT * FROM kategori,wisata where kategori.id_kategori = wisa
 
                    <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-info">Lihat</button></a>
                   <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-primary">Edit</button></a>
-                  <a href="deleteadmin.php?id_user=<?= $row["id_user"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
+                  <a href="deletewisata.php?id_wisata=<?= $row["id_wisata"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
                  </td>
                </tr>
              <?php endforeach; ?>
