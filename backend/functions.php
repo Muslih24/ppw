@@ -198,4 +198,18 @@ function cari($keyword){
 	return query($query);
 	}
 
+// function cariw($keyword){
+// 	$query = "SELECT * FROM wisata
+// 		WHERE
+// 		nama_wisata LIKE '%$keyword%'";
+// 	return query($query);
+// 	}
+
+
+function carik($keyword){
+	$query = "SELECT * FROM kategori
+		WHERE
+		nama_kategori LIKE '%$keyword%'";
+	return query($query);
+	}
  ?>
