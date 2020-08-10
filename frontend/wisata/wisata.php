@@ -129,49 +129,8 @@ $a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
           </div>
         </div>
       </div>
-
-
-<!--
-    <div class="site-section">
-
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center">
-            <p style="font-size: 28px;" class="font-weight-light text-black">Kategori</p>
-          </div>
-        </div>
-        <div class="row">
-
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <a href="detailkategori.php?id_kategori=<?= $rows["id_wisata"]  ?>">
-            <a href="#" class="unit-1 text-center">
-              <div class="unit-1-text">
-                <h3 class="unit-1-heading"></h3>
-              </div>
-            </a>
-          </div>
-        </div>
       </div>
-    </div>
-    </div> -->
 
-    <!-- <div class="site-section bg-light">
-
-    </div> -->
-
-
-    <div class="site-blocks-cover overlay inner-page-cover" style="background-image: url(../../assets/frontend/images/vimala_hils.jpg); background-attachment: fixed;">
-      <div class="container">
-        <div class="row align-items-center justify-content-center text-center">
-
-          <div class="col-md-7" data-aos="fade-up" data-aos-delay="400">
-            <a href="../../assets/frontend/images/kita_video.mp4" class="play-single-big mb-4 d-inline-block popup-vimeo"><span class="icon-play"></span></a>
-            <h2 class="text-white font-weight-light mb-5 h1">By : 7 Journey</h2>
-
-          </div>
-        </div>
-      </div>
-    </div>
 
 
 
