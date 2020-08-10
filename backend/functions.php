@@ -25,7 +25,6 @@ function query($query){
 
 mysqli_query($conn,$query);
 
-
 return mysqli_affected_rows($conn);
 
 
@@ -62,12 +61,7 @@ global $conn;
 	$password = htmlspecialchars($data["password"]);
 	$hak_akses = $data["hak_akses"];
 	$nama = htmlspecialchars($data["nama"]);
-	$query = mysqli_query($conn, "UPDATE user SET
-			username = '$username',
-			password = md5('$password'),
-			nama = '$nama',
-			hak_akses = '$hak_akses'
-			WHERE id_user = $id_user");
+	$query = mysqli_query($conn, "UPDATE user SET username = '$username', password = md5('$password'),nama = '$nama',	hak_akses = '$hak_akses' WHERE id_user = $id_user");
 
 
 	return mysqli_affected_rows($conn);
@@ -86,32 +80,12 @@ global $conn;
 
 		$query = "INSERT INTO kategori VALUES('','$nama_kategori','$deskripsi_kategori','$foto_kategori')";
 
-
-		mysqli_query($conn,$query);
-
-		return mysqli_affected_rows($conn);
-	}
-	function edit($data){
-		global $conn;
-
-		$nama_kategori = htmlspecialchars($data["nama_kategori"]);
-		$deskripsi_kategori = htmlspecialchars($data["deskripsi_kategori"]);
-
-		$foto_kategori = upload();
-			if (!$foto_kategori) {
-				return false;
-			}
-		$query = "UPDATE kategori SET(
-		'',
-		nama_kategori ='$nama_kategori',
-		deskripsi_kategori='$deskripsi_kategori',
-		foto_kategori ='$foto_kategori')";
-
-
-		mysqli_query($conn,$query);
+ 		mysqli_query($conn,$query);
 
 		return mysqli_affected_rows($conn);
 	}
+
+
 
 	function upload(){
 		$namaFile = $_FILES["foto_kategori"]["name"];
@@ -129,11 +103,7 @@ global $conn;
 
 		$eksgambar = explode('.', $namaFile);
 		$eksgambar = strtolower(end($eksgambar));
-		$namaBaru = date("YmdHis");
-		$namaBaru .= '.';
-		$namaBaru .= $eksgambar;
 
-		//var_dump($namaBaru);die;
 		if (!in_array($eksgambar, $eksgambarvalid)) {
 			echo "<script>
 			alert('Bukan gambar itu teh');
@@ -148,31 +118,53 @@ global $conn;
 			return false;
 		}
 
-		move_uploaded_file($tmpName, '../../../assets/img/kategori/' .$namaBaru);
+		$namaBaru = date("YmdHis");
+		$namaBaru .= '.';
+		$namaBaru .= $eksgambar;
+
+		move_uploaded_file($tmpName, '../../../assets/img/images/kategori/' .$namaBaru);
 
 		return $namaBaru;
-
 	}
 
-	 function deletek($id_kategori){
-	 	global $conn;
-	if($hapus){
-			echo "
-				<script>
-					alert('Successed To Delete');
-					document.location.href = 'index_kategori.php';
-				</script>
-			";
-		}else{
-			echo "
-				<script>
-				alert('Failed To Delete');
-					document.location.href = 'index_kategori.php';
-				</script>
-			";
-		}
+	function edit($data){
+		global $conn;
+		$id_kategori = $data["id_kategori"];
+		$nama_kategori = htmlspecialchars($data["nama_kategori"]);
+		$deskripsi_kategori = htmlspecialchars($data["deskripsi_kategori"]);
+		$gambarLama  = htmlspecialchars($data["gambarLama"]);
+
+
+		if ( $_FILES['foto_kategori']['error'] === 4) {
+			$foto_kategori = $gambarLama;
+		}else {
+			$foto_kategori  = upload();
 		}
 
+		$queryk = mysqli_query($conn, "UPDATE kategori SET nama_kategori = '$nama_kategori', deskripsi_kategori = '$deskripsi_kategori',foto_kategori = '$foto_kategori' WHERE id_kategori = $id_kategori");
+
+		return mysqli_affected_rows($conn);
+	}
+
+	function deletek($id_kategori){
+  	global $conn;
+  	$deletek = mysqli_query($conn, "DELETE FROM kategori WHERE id_kategori = $id_kategori");
+ 	if($deletek){
+ 		echo "
+ 			<script>
+ 				alert('Successed To Delete');
+ 				document.location.href = 'index_kategori.php';
+ 			</script>
+ 		";
+ 	}else{
+ 		echo "
+ 			<script>
+ 			alert('Failed To Delete');
+ 				document.location.href = 'index_kategori.php';
+ 			</script>
+ 		";
+ 	}
+ 	}
 
 function addw($data){
 		global $conn;
@@ -195,46 +187,6 @@ function addw($data){
 		return mysqli_affected_rows($conn);
 	}
 
-	function uploadw(){
-		$namaFile = $_FILES["foto_kategori"]["name"];
-		$ukuranFile = $_FILES["foto_kategori"]["size"];
-		$error = $_FILES["foto_kategori"]["error"];
-		$tmpName = $_FILES["foto_kategori"]["tmp_name"];
-		$eksgambarvalid = ['jpg','jpeg','png'];
-
-		if ($error === 4) {
-			echo "<script>
-			alert('Pilih gambar bang');
-			</script>";
-			return false;
-		}
-
-		$eksgambar = explode('.', $namaFile);
-		$eksgambar = strtolower(end($eksgambar));
-		$namaBaru = date("YmdHis");
-		$namaBaru .= '.';
-		$namaBaru .= $eksgambar;
-
-		//var_dump($namaBaru);die;
-		if (!in_array($eksgambar, $eksgambarvalid)) {
-			echo "<script>
-			alert('Bukan gambar itu teh');
-			</script>";
-			return false;
-		}
-
-		if ($ukuranFile > 3000000) {
-			echo "<script>
-			alert('Ukurannya kebesaran');
-			</script>";
-			return false;
-		}
-
-		move_uploaded_file($tmpName, '../../../assets/img/images/kategori/' .$namaBaru);
-
-		return $namaBaru;
-
-	}
 
 
 function cari($keyword){

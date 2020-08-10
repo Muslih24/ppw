@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="../assets/frontend/images/logo_kita.png">
+    <link rel="icon" type="image/png" href="..\assets\img\logo\Logo7.png">
     <title>7Journey</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -305,7 +305,7 @@ Berdasarkan latar belakang masalah di atas  maka penyusun mengambil judul “Sev
       </div>
     </div>
 
-           <footer class="site-footer">
+      <footer class="site-footer">
         <div class="text-center">
           <div class="col-md-12">
 

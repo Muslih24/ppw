@@ -168,11 +168,11 @@ $kategori = query("SELECT * FROM kategori WHERE id_kategori = $id_kategori")[0];
           </div>
           <div class="form-group">
             <td></td>
-            <label><b>Foto : </b><?="<img src='../../../assets/img/kategori/".$kategori['foto_kategori']."'style='width:450px; height:300px;';>"?></label>
+            <label><b>Foto : </b><?="<img src='../../../assets/img/images/kategori/".$kategori['foto_kategori']."'style='width:450px; height:300px;';>"?></label>
           </div>
           <br>
-          <a href="updateadmin.php?id_user=<?= $user["id_user"]  ?>"><button class="btn btn-primary">Edit</button></a>&nbsp&nbsp
-          <a href="deleteadmin.php?id_user=<?= $user["id_user"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
+          <a href="editkategori.php?id_kategori=<?= $kategori["id_kategori"]  ?>">  <button class="btn btn-primary">Edit</button></a>&nbsp&nbsp
+          <a href="deletekategori.php?id_kategori=<?= $kategori["id_kategori"]  ?>">  <button class="btn btn-danger">Hapus</button></a>&nbsp&nbsp
 
           <br><br>
        </div>

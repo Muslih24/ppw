@@ -123,12 +123,7 @@ if (isset($_POST["submit"])) {
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar static-top ">
 
-          <!-- Sidebar Toggle (Topbar) -->
-
-
-
-
-
+        <!-- Sidebar Toggle (Topbar) -->
         </nav>
         <!-- End of Topbar -->
 
@@ -164,7 +159,7 @@ if (isset($_POST["submit"])) {
                 </div>
 
                 <div class="form-group">
-                  <label for="foto">Foto :</label>
+                  <label for="foto">Foto : </label>
                   <input class="form-control-file" type="file" name="foto_kategori" id="foto">
                 </div>
 

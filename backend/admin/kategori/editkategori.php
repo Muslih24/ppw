@@ -123,7 +123,7 @@ if (isset($_POST["submit"])) {
       <!-- Main Content -->
       <div id="content">
 
-        !-- Topbar -->
+        <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar static-top ">
 
           <!-- Sidebar Toggle (Topbar) -->
@@ -137,7 +137,7 @@ if (isset($_POST["submit"])) {
 
 				<div class="breadcrumb">
 						<li class="breadcrumb-item"><a href="index_kategori.php">Kategori</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Tambah Data</li>
+						<li class="breadcrumb-item active" aria-current="page">Edit Data</li>
 				</div>
 
         <!-- Begin Page Content -->
@@ -145,12 +145,12 @@ if (isset($_POST["submit"])) {
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Tambah Data</h1>
+            <h1 class="h3 mb-0 text-gray-800">Edit Data</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"></a> -->
           </div>
        </div>
        <div class="container-fluid">
-         <div class="addkategori">
+         <div class="editkategori">
 					 <form action="" method="post" enctype="multipart/form-data">
 					 	<div class="row">
 							<div class="col-md-6">
@@ -158,7 +158,9 @@ if (isset($_POST["submit"])) {
                 <div class="">
                   <div class="form-group">
 									   <label for="nama_kategori">Nama Kategori :</label>
-                  <input class="form-control" type="varchar" name="nama_kategori" id="nama_kategori" required value="<?= $user["nama_kategori"]?>" >
+                     <input type="hidden" name="id_kategori" value="<?= $user["id_kategori"]?>" >
+                     <input type="hidden" name="gambarLama"  value="<?= $user["foto_kategori"]?>">
+                     <input class="form-control" type="varchar" name="nama_kategori" id="nama_kategori" required value="<?= $user["nama_kategori"]?>" >
 								   </div>
                 </div>
                 <div class="form-group">
@@ -170,14 +172,14 @@ if (isset($_POST["submit"])) {
 
                   <label for="foto">Foto :</label>
                   <br>
-                  <img src="img/<?= $user['foto_kategori'] ?>">
-                  <input class="form-control-file" type="file" name="foto_kategori" id="foto">
+                  <img src="../../../assets/img/images/kategori/<?= $user['foto_kategori'] ?>" style=width:450px; height:300px;>
+                  <input type="file" name="foto_kategori" id="foto_kategori">
                 </div>
 
 							<br>
 
 					 		<div class="col-md-">
-								<button type="submit" class="btn btn-primary" name="submit">Simpan Data</button>
+                <button type="submit" class="btn btn-primary" name="submit">Simpan Data</button>
 					 			<button type="Cancel" class="btn btn-secondary">Batal</button>
 					 		</div>
 

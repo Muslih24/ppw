@@ -12,14 +12,14 @@ if (deletek($id_kategori) > 0 ) {
 		echo "
 			<script>
 				alert('Successed To Delete');
-				document.location.href = 'index_admin.php';
+				document.location.href = 'index_kategori.php';
 			</script>
 		";
 	}else{
 		echo "
 			<script>
 			alert('Failed To Delete');
-				document.location.href = 'index_admin.php';
+				document.location.href = 'index_kategori.php';
 			</script>
 		";
 	}
