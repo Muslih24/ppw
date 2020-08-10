@@ -212,7 +212,7 @@ $wisata = query("SELECT * FROM kategori,wisata where kategori.id_kategori = wisa
                  <td style="width:30%">
 
                    <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-info">Lihat</button></a>
-                  <a href="updateadmin.php?id_user=<?= $row["id_user"]  ?>">  <button class="btn btn-primary">Edit</button></a>
+                  <a href="editwisata.php?id_wisata=<?= $row["id_wisata"]  ?>">  <button class="btn btn-primary">Edit</button></a>
                   <a href="deletewisata.php?id_wisata=<?= $row["id_wisata"]  ?>"onclick=" return confirm('hapus?');"><button class="btn btn-danger">Delete</button></a>
                  </td>
                </tr>
