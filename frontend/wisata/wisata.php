@@ -108,7 +108,7 @@ $a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
           <div class="row" style="background-color:#dddddd;margin-bottom:20px">
             <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="" style="margin-top:50px">
               <figure class="circle-bg">
-                <?="<img src='../../assets/img/images/kategori/".$rows['lampiran']."'style='width:450px; height:300px; margin-left:100px';>"?>
+                <?="<img src='../../assets/img/images/wisata/".$rows['lampiran']."'style='width:450px; height:300px; margin-left:100px';>"?>
               </figure>
             </div>
             <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">

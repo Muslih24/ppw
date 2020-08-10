@@ -1,0 +1,8 @@
+backend : http://localhost/ppw/backend/login.php
+
+username : admin
+pass : 123
+
+frontend : http://localhost/ppw/frontend/
+
+nama db : db_wisata

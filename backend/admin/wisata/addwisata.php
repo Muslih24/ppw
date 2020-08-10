@@ -43,7 +43,6 @@ $sql=mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
   <link href="../../../assets/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="../../../assets/css/sb-admin-2.min.css" rel="stylesheet">
   <link href="../../../assets/css/style.css" rel="stylesheet">
-  <head>
 
 
     <!-- Custom fonts for this template-->
@@ -58,8 +57,6 @@ $sql=mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-
            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
              <!-- Sidebar - Brand -->
@@ -150,12 +147,12 @@ $sql=mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
 
                    <div class="form-group">
                      <label for="id_kategori">Kategori :</label>
-                     <select name="id_kategori" id="id_kategori">
+                     <select class="form-control" name="id_kategori" id="id_kategori">
                        <option disabled selected> Pilih </option>
                        <?php
-                       while ($data=mysqli_fetch_array($sql)) {
-                          ?>
-                          <option value="<?=$data['nama_kategori']?>"><?=$data['nama_kategori']?></option>
+                       foreach ($sql as $data) {
+                           ?>
+                          <option value="<?=$data['id_kategori']?>"><?=$data['nama_kategori']?></option>
                           <?php
                         }
                         ?>

@@ -171,6 +171,7 @@ global $conn;
 	function editw($data){
 		global $conn;
 		$id_wisata = $data["id_wisata"];
+		$id_kategori = htmlspecialchars($data["id_kategori"]);
 		$nama_wisata = htmlspecialchars($data["nama_wisata"]);
 		$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
 		$harga = htmlspecialchars($data["harga"]);
@@ -186,7 +187,7 @@ global $conn;
 
 
 
-		$queryw = mysqli_query($conn, "UPDATE wisata SET nama_wisata = '$nama_wisata', alamat_wisata = '$alamat_wisata',harga = '$harga',lampiran = '$lampiran' WHERE id_wisata = $id_wisata");
+		$queryw = mysqli_query($conn, "UPDATE wisata SET id_kategori = '$id_kategori', nama_wisata = '$nama_wisata', alamat_wisata = '$alamat_wisata',harga = '$harga',lampiran = '$lampiran' WHERE id_wisata = $id_wisata");
 
 		return mysqli_affected_rows($conn);
 	}
@@ -214,8 +215,9 @@ global $conn;
 function addw($data){
 		global $conn;
 
+		$id_wisata = htmlspecialchars($data["id_wisata"]);
+		$id_kategori = htmlspecialchars($data["id_kategori"]);
 		$nama_wisata = htmlspecialchars($data["nama_wisata"]);
-	 	//$id_kategori = strtolower(stripslashes($data["id_kategori"]));
 		$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
 		$harga = htmlspecialchars($data["harga"]);
 		$fasilitas = htmlspecialchars($data["fasilitas"]);
@@ -224,8 +226,7 @@ function addw($data){
 			if (!$lampiran) {
 				return false;
 			}
-			$query = "INSERT INTO wisata ('id_wisata','nama_wisata','alamat_wisata','harga','fasilitas','lampiran') VALUES	('','$nama_wisata','$alamat_wisata', '$harga', '$fasilitas','$lampiran')";
-			mysqli_query($conn,$query);
+			$queryw = mysqli_query($conn,"INSERT INTO wisata VALUES	('','$id_kategori','$nama_wisata','$alamat_wisata', '$harga', '$fasilitas','$lampiran')");
 
 		return mysqli_affected_rows($conn);
 	}

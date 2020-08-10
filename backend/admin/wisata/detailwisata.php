@@ -9,7 +9,7 @@ if (!$_SESSION["hak_akses"]=="superadmin") {
 
 $id_wisata = $_GET["id_wisata"];
 
-$wisata = query("SELECT * FROM wisata WHERE id_wisata = $id_wisata")[0];
+$a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id_kategori=wisata.id_kategori WHERE wisata.id_wisata = '$id_wisata'");
 
 ?>
 
@@ -69,14 +69,14 @@ $wisata = query("SELECT * FROM wisata WHERE id_wisata = $id_wisata")[0];
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../wisata/index_wisata.php">
+      <li class="nav-item active">
+        <a class="nav-link collapsed" href="index_wisata.php">
           <i class="fas fa-fw fa-leaf"></i>
           <span>Wisata</span>
         </a>
       </li>
 
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="../kategori/index_kategori.php ">
           <i class="fas fa-fw fa-database"></i>
           <span>Kategori</span>
@@ -159,20 +159,32 @@ $wisata = query("SELECT * FROM wisata WHERE id_wisata = $id_wisata")[0];
        <div class="container-fluid">
 
          <br><br>
-          <div class="form-group">
-            <label><b>Nama : </b><?= $wisata['nama_wisata']?></label>
-          </div>
-          <div class="form-group">
+         <?php while ($data = mysqli_fetch_assoc($a)) {
 
-            <label><b>Deskripsi : </b><?= $wisata['alamat_wisata']?></label>
+         ?>
+          <div class="form-group">
+            <label><b>Nama : </b><?= $data['nama_wisata']?></label>
           </div>
-          <!-- <div class="form-group">
+          <div class="form-group">
+            <label><b>Kategori : </b><?= $data['nama_kategori']?></label>
+          </div>
+          <div class="form-group">
+            <label><b>Alamat : </b><?= $data['alamat_wisata']?></label>
+          </div>
+          <div class="form-group">
+            <label><b>Harga : </b><?= $data['harga']?></label>
+          </div>
+          <div class="form-group">
+            <label><b>Fasilitas : </b><?= $data['fasilitas']?></label>
+          </div>
+          <div class="form-group">
             <td></td>
-            <label><b>Foto : </b><?="<img src='../../../assets/img/images/kategori/".$kategori['foto_kategori']."'style='width:450px; height:300px;';>"?></label>
-          </div> -->
+            <label><b>Foto : </b><?="<img src='../../../assets/img/images/wisata/".$data['lampiran']."'style='width:450px; height:300px;';>"?></label>
+          </div>
           <br>
-          <a href="editwisata.php?id_wisata=<?= $wisata["id_wisata"]  ?>">  <button class="btn btn-primary">Edit</button></a>&nbsp&nbsp
-          <a href="deletewisata.php?id_wisata=<?= $wisata["id_wisata"]  ?>">  <button class="btn btn-danger">Hapus</button></a>&nbsp&nbsp
+          <a href="editwisata.php?id_wisata=<?= $data["id_wisata"]  ?>">  <button class="btn btn-primary">Edit</button></a>&nbsp&nbsp
+          <a href="deletewisata.php?id_wisata=<?= $data["id_wisata"]  ?>">  <button class="btn btn-danger">Hapus</button></a>&nbsp&nbsp
+        <?php } ?>
 
           <br><br>
        </div>
