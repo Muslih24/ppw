@@ -7,6 +7,10 @@ if (!$_SESSION["hak_akses"]=="superadmin") {
 }
 
 $kategori = query("SELECT * FROM kategori");
+
+if (isset($_POST["cari"])) {
+  $kategori = cariw($_POST["keyword"]);
+}
 ?>
 
 
