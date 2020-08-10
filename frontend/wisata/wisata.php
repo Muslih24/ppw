@@ -5,6 +5,10 @@ require '../../backend/functions.php';
 $id_kategori = $_GET["id_kategori"];
 
 $wisata = mysqli_query($conn,"SELECT * FROM wisata WHERE id_kategori = '$id_kategori'");
+
+$a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id_kategori=wisata.id_kategori WHERE wisata.id_kategori = '$id_kategori'");
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,93 +74,64 @@ $wisata = mysqli_query($conn,"SELECT * FROM wisata WHERE id_kategori = '$id_kate
               </ul>
             </nav>
           </div>
-
-
-
-            <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h2"></span></a></div>
-
-
+          <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h2"></span></a></div>
         </div>
       </div>
-
     </header>
-
-
-
-
-
     <div class="slide-one-item home-slider owl-carousel">
-
-      <div class="site-blocks-cover overlay" style="background-image: url(../../assets/frontend/images/view_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+      <?php while ($rows = mysqli_fetch_array($a)) { ?>
+      <div class="site-blocks-cover overlay" style="background-image: url(../../assets/frontend/images/view_1.jpg);">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
-
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
 
-
-              <h1 class="text-white font-weight-light">Jangan Lupa HOLIDAE</h1>
-              <p class="mb-5" style="font-size: 18px;">"Mari Melangkah, Tinggalkan Penat"</p>
-
-
+              <h1 class="text-white font-weight-light"><?= $rows['nama_kategori'];?></h1>
+              <p class="mb-5" style="font-size: 18px;"><?= $rows['deskripsi_kategori'];?></p>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="site-blocks-cover overlay" style="background-image: url(../../assets/frontend/images/view_2.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
-        <div class="container">
-          <div class="row align-items-center justify-content-center text-center">
-
-            <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
-              <h1 class="text-white font-weight-light">Banyak Tempat Wisata Yang Menarik</h1>
-              <p class="mb-5">"Check Informasi Wisata Disini Guys"</p>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <?php }?>
     </div>
 
-    <div class="site-section">
-      <div class="container overlap-section">
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <a href="#" class="unit-1 text-center">
-              <img src="../../assets/frontend/images/kawah_ratu.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <h3 class="unit-1-heading">Kawah Ratu Bogor</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <a href="#" class="unit-1 text-center">
-              <img src="../../assets/frontend/images/kebon_raya.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <h3 class="unit-1-heading">Kebun Raya Bogor</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-            <a href="#" class="unit-1 text-center">
-              <img src="../../assets/frontend/images/ranggon_hils.jpg" alt="Image" class="img-fluid">
-              <div class="unit-1-text">
-                <h3 class="unit-1-heading">Ranggon Hils</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
 
     <div class="site-section block-13 bg-light">
 
 
+      <div class="site-section cta-big-image" id="about-section">
+        <div class="container">
+          <div class="row mb-5">
+
+          <?php while ($rows = mysqli_fetch_array($wisata)) { ?>
+          </div>
+
+          <div class="row" style="background-color:#dddddd;margin-bottom:20px">
+            <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="" style="margin-top:50px">
+              <figure class="circle-bg">
+                <?="<img src='../../assets/img/images/kategori/".$rows['lampiran']."'style='width:450px; height:300px; margin-left:100px';>"?>
+              </figure>
+            </div>
+            <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
+              <div class="mb-4" style="margin-top:50px">
+                <h3 class="h3 mb-4 text-black" style="font-size:30px"><?= $rows["nama_wisata"]?></h3>
+              </div>
+              <div class="mb-4">
+                <ul class="list-unstyled ul-check success" style="font-size:20px">
+                  <li>Harga &nbsp&nbsp&nbsp : <?= $rows["harga"]?></li>
+                  <li>Alamat &nbsp : <?= $rows["alamat_wisata"]?></li>
+                  <li><a href="detail.php?id_wisata=<?= $rows["id_wisata"]?>" class="btn btn-primary" style="border-radius:20px; height:40px; width:200px; margin-top:65px">Lihat</a></li>
+                </ul>
+              </div>
+            </div>
+
+          </section>
+          <?php } ?>
+          </div>
+        </div>
+      </div>
 
 
-
-
+<!--
     <div class="site-section">
 
       <div class="container">
@@ -166,23 +141,19 @@ $wisata = mysqli_query($conn,"SELECT * FROM wisata WHERE id_kategori = '$id_kate
           </div>
         </div>
         <div class="row">
-          <?php while ($rows = mysqli_fetch_array($wisata)) {
-            // code...
-          ?>
+
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <a href="detailkategori.php?id_kategori=<?= $rows["id_wisata"]  ?>">
             <a href="#" class="unit-1 text-center">
-              <?="<img src='../../assets/img/images/kategori/".$rows['lampiran']."'style='width:450px; height:300px;';>"?>
               <div class="unit-1-text">
-                <h3 class="unit-1-heading"><?= $rows["nama_wisata"]?></h3>
+                <h3 class="unit-1-heading"></h3>
               </div>
             </a>
           </div>
-        <?php }  ?>
         </div>
       </div>
     </div>
-    </div>
+    </div> -->
 
     <!-- <div class="site-section bg-light">
 
