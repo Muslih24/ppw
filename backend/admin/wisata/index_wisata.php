@@ -8,6 +8,9 @@ if (!$_SESSION["hak_akses"]=="superadmin") {
 
 $wisata = query("SELECT * FROM kategori,wisata where kategori.id_kategori = wisata.id_kategori");
 
+// if (isset($_POST["cari"])) {
+//   $wisata = cariw($_POST["keyword"]);
+// }
 
 
  ?>
