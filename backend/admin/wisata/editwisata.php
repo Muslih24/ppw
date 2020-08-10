@@ -11,6 +11,7 @@ $wisata = query("SELECT * FROM wisata WHERE id_wisata = $id_wisata")[0];
 
 //cek submit
 if (isset ($_POST["submit"]) ) {
+  var_dump($_POST);die;
 	//cek keberhasilan
 	if (editw ($_POST) > 0 ) {
 		echo "
@@ -38,12 +39,13 @@ if (isset ($_POST["submit"]) ) {
 <body>
 
 <h1>Update Data Wisata</h1>
-<form action="" method="post">
-	<input type="hidden" name="id_wisata" value="<?= $wisata["id_wisata"]; ?>">
+ <form action="" method="post" enctype="multipart/form-data">
 	<ul>
 		<li>
 			<label for="nama_wisata">Nama Wisata :</label>
-			<input type="varchar" name="nama_wisata" id="nama_wisata" required value="<?= $wisata["nama_wisata"];  ?>">
+      <input type="hidden" name="id_wisata" value="<?= $wisata["id_wisata"]?>" >
+      <input type="hidden" name="gambarLamaW"  value="<?= $wisata["lampiran"]?>">
+      <input type="varchar" name="nama_wisata" id="nama_wisata" required value="<?= $wisata["nama_wisata"];  ?>">
 		</li>
 		<li>
 			<label for="alamat_wisata">Alamat Wisata :</label>
@@ -57,10 +59,12 @@ if (isset ($_POST["submit"]) ) {
 			<label for="fasilitas">Fasilitas :</label>
 			<input type="text" name="fasilitas" id="fasilitas" required value="<?= $wisata["fasilitas"]; ?>">
 		</li>
-		<li>
-			<label for="lampiran">Lampiran :</label>
-			 <input type="file" id="lampiran">
-		</li>
+  <li>
+      <label for="foto">Foto :</label>
+      <br>
+      <img src="../../../assets/img/images/wisata/<?= $wisata['lampiran'] ?>" style=width:450px; height:300px;>
+      <input type="file" name="lampiran" id="lampiran">
+    </li>
 		<li>
 			<button type="submit" name="submit">Edit Data</button>
 		</li>

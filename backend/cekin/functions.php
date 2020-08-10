@@ -51,11 +51,6 @@ global $conn;
 	$password = htmlspecialchars($data["password"]);
 	$hak_akses = $data["hak_akses"];
 	$nama = htmlspecialchars($data["nama"]);
-	$jk = $data["jk"];
-	$tanggal_lahir = $data["tanggal_lahir"];
-	$alamat = htmlspecialchars($data["alamat"]);
-	$no_hp = htmlspecialchars($data["no_hp"]);
-	$email = htmlspecialchars($data["email"]);
 	$query = mysqli_query($conn, "UPDATE user SET
 			username = '$username',
 			password = md5('$password'),
@@ -79,7 +74,7 @@ function addw($data){
 	$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
 	$harga = htmlspecialchars($data["harga"]);
 	$jarak = htmlspecialchars($data["jarak"]);
-	
+
 	$tikor_wisata = htmlspecialchars($data["tikor_wisata"]);
 	$fasilitas = htmlspecialchars($data["fasilitas"]);
 	$kategori = $data["kategori"];

@@ -52,8 +52,7 @@ if (isset($_POST["submit"])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Buwung Puyuh</title>
-
+  
     <!-- Custom fonts for this template-->
     <link href="../../../assets/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->

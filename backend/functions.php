@@ -146,25 +146,7 @@ global $conn;
 		return mysqli_affected_rows($conn);
 	}
 
-	function editw($data){
-		global $conn;
-		$id_wisata = $data["id_wisata"];
-		$nama_wisata = htmlspecialchars($data["nama_wisata"]);
-		$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
-		$harga = htmlspecialchars($data["harga"]);
-		$fasilitas  = htmlspecialchars($data["fasilitas"]);
 
-
-		// if ( $_FILES['foto_wisata']['error'] === 4) {
-		// 	$foto_kategori = $gambarLama;
-		// }else {
-		// 	$foto_kategori  = upload();
-		// }
-
-		$queryw = mysqli_query($conn, "UPDATE wisata SET nama_wisata = '$nama_wisata', alamat_wisata = '$alamat_wisata',harga = '$harga' WHERE id_wisata = $id_wisata");
-
-		return mysqli_affected_rows($conn);
-	}
 
 	function deletek($id_kategori){
   	global $conn;
@@ -185,6 +167,29 @@ global $conn;
  		";
  	}
  	}
+
+	function editw($data){
+		global $conn;
+		$id_wisata = $data["id_wisata"];
+		$nama_wisata = htmlspecialchars($data["nama_wisata"]);
+		$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
+		$harga = htmlspecialchars($data["harga"]);
+		$fasilitas  = htmlspecialchars($data["fasilitas"]);
+		$gambarLamaW  = htmlspecialchars($data["gambarLamaW"]);
+
+
+			if ( $_FILES['lampiran']['error'] === 4) {
+				$lampiran = $gambarLamaW;
+			}else {
+				$lampiran  = uploadw();
+			}
+
+
+
+		$queryw = mysqli_query($conn, "UPDATE wisata SET nama_wisata = '$nama_wisata', alamat_wisata = '$alamat_wisata',harga = '$harga',lampiran = '$lampiran' WHERE id_wisata = $id_wisata");
+
+		return mysqli_affected_rows($conn);
+	}
 
  	function deletew($id_wisata){
   	global $conn;
@@ -209,21 +214,62 @@ global $conn;
 function addw($data){
 		global $conn;
 
-		$nama_wisata = strtolower(stripslashes($data["nama_wisata"]));
+		$nama_wisata = htmlspecialchars($data["nama_wisata"]);
 	 	//$id_kategori = strtolower(stripslashes($data["id_kategori"]));
 		$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
 		$harga = htmlspecialchars($data["harga"]);
 		$fasilitas = htmlspecialchars($data["fasilitas"]);
 
-		// $lampiran = upload();
-		// 	if (!$lampiran) {
-		// 		return false;
-		//	}
-			$query = "INSERT INTO wisata VALUES	('$nama_wisata','$alamat_wisata', '$harga', '$fasilitas')";
-		mysqli_query($conn,$query);
+		$lampiran = uploadw();
+			if (!$lampiran) {
+				return false;
+			}
+			$query = "INSERT INTO wisata ('id_wisata','nama_wisata','alamat_wisata','harga','fasilitas','lampiran') VALUES	('','$nama_wisata','$alamat_wisata', '$harga', '$fasilitas','$lampiran')";
+			mysqli_query($conn,$query);
 
 		return mysqli_affected_rows($conn);
 	}
+
+	function uploadw(){
+		$namaFile = $_FILES["lampiran"]["name"];
+		$ukuranFile = $_FILES["lampiran"]["size"];
+		$error = $_FILES["lampiran"]["error"];
+		$tmpName = $_FILES["lampiran"]["tmp_name"];
+		$eksgambarvalid = ['jpg','jpeg','png'];
+
+		if ($error === 4) {
+			echo "<script>
+			alert('Pilih gambar bang');
+			</script>";
+			return false;
+		}
+
+		$eksgambar = explode('.', $namaFile);
+		$eksgambar = strtolower(end($eksgambar));
+
+		if (!in_array($eksgambar, $eksgambarvalid)) {
+			echo "<script>
+			alert('Bukan gambar itu teh');
+			</script>";
+			return false;
+		}
+
+		if ($ukuranFile > 3000000) {
+			echo "<script>
+			alert('Ukurannya kebesaran');
+			</script>";
+			return false;
+		}
+
+		$namaBaru = date("YmdHis");
+		$namaBaru .= '.';
+		$namaBaru .= $eksgambar;
+
+		move_uploaded_file($tmpName, '../../../assets/img/images/wisata/' .$namaBaru);
+
+		return $namaBaru;
+	}
+
 
 
 
