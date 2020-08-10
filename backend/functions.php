@@ -166,22 +166,40 @@ global $conn;
  	}
  	}
 
+ 	function deletew($id_wisata){
+  	global $conn;
+  	$deletew = mysqli_query($conn, "DELETE FROM wisata WHERE id_wisata = $id_wisata");
+ 	if($deletew){
+ 		echo "
+ 			<script>
+ 				alert('Successed To Delete');
+ 				document.location.href = 'index_wisata.php';
+ 			</script>
+ 		";
+ 	}else{
+ 		echo "
+ 			<script>
+ 			alert('Failed To Delete');
+ 				document.location.href = 'index_wisata.php';
+ 			</script>
+ 		";
+ 	}
+ 	}
+
 function addw($data){
 		global $conn;
 
 		$nama_wisata = strtolower(stripslashes($data["nama_wisata"]));
-	 	$id_kategori = strtolower(stripslashes($data["id_kategori"]));
+	 	//$id_kategori = strtolower(stripslashes($data["id_kategori"]));
 		$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
 		$harga = htmlspecialchars($data["harga"]);
 		$fasilitas = htmlspecialchars($data["fasilitas"]);
 
-		$lampiran = upload();
-			if (!$lampiran) {
-				return false;
-			}
-			$query = "INSERT INTO wisata VALUES	('$nama_wisata', '$id_kategori','$alamat_wisata', '$harga', '$fasilitas')
-							";
-
+		// $lampiran = upload();
+		// 	if (!$lampiran) {
+		// 		return false;
+		//	}
+			$query = "INSERT INTO wisata VALUES	('$nama_wisata','$alamat_wisata', '$harga', '$fasilitas')";
 		mysqli_query($conn,$query);
 
 		return mysqli_affected_rows($conn);
