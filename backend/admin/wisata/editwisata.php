@@ -1,26 +1,29 @@
 <?php
-require 'functions.php';
+session_start();
+require '../../functions.php';
 
+if (!$_SESSION["hak_akses"]=="superadmin") {
+  header("Location:../../login.php");
+}
 $id_wisata = $_GET["id_wisata"];
 
 $wisata = query("SELECT * FROM wisata WHERE id_wisata = $id_wisata")[0];
 
-var_dump($wisata);
 //cek submit
 if (isset ($_POST["submit"]) ) {
 	//cek keberhasilan
-	if (edit ($_POST) > 0 ) {
+	if (editw ($_POST) > 0 ) {
 		echo "
 			<script>
 				alert('Successed To Edit!');
-				document.location.href = 'wisata.php';
+				document.location.href = 'index_wisata.php';
 			</script>
 		";
 	}else{
 		echo "
 			<script>
 				alert('Failed To Edit!');
-				document.location.href = 'wisata.php';
+				document.location.href = 'index_wisata.php';
 			</script>
 		";
 	}
@@ -51,29 +54,12 @@ if (isset ($_POST["submit"]) ) {
 			<input type="varchar" name="harga" id="harga" required value="<?= $wisata["harga"]; ?>">
 		</li>
 		<li>
-			<label for="jarak">Jarak :</label>
-			<input type="varchar" name="jarak" id="jarak" required value="<?= $wisata["jarak"]; ?>">
-		</li>
-		<li>
-			<label for="tikor_wisata">Titik Kordinat Wisata :</label>
-			<input type="text" name="tikor_wisata" required value="<?= $wisata["tikor_wisata"]; ?>">
-		</li>
-		<li>
 			<label for="fasilitas">Fasilitas :</label>
 			<input type="text" name="fasilitas" id="fasilitas" required value="<?= $wisata["fasilitas"]; ?>">
 		</li>
-		<li class="form-group">
-			<label for="kategori">Kategori Wisata :</label>
-			<select class="form-control" name="kategori" id="kategori" required value="<?= $wisata["kategori"]; ?>">
-			<option value="">Pilih</option>
-			<option value="kawah">Kawah</option>
-			<option value="curug">Curug</option>
-			<option value="gunung">Gunung</option>
-			</select>
-		</li>
 		<li>
 			<label for="lampiran">Lampiran :</label>
-			 <input type="text" name="lampiran" id="lampiran"  required value="<?= $wisata["lampiran"]; ?>">
+			 <input type="file" id="lampiran">
 		</li>
 		<li>
 			<button type="submit" name="submit">Edit Data</button>
