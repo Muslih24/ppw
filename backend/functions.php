@@ -146,6 +146,26 @@ global $conn;
 		return mysqli_affected_rows($conn);
 	}
 
+	function editw($data){
+		global $conn;
+		$id_wisata = $data["id_wisata"];
+		$nama_wisata = htmlspecialchars($data["nama_wisata"]);
+		$alamat_wisata = htmlspecialchars($data["alamat_wisata"]);
+		$harga = htmlspecialchars($data["harga"]);
+		$fasilitas  = htmlspecialchars($data["fasilitas"]);
+
+
+		// if ( $_FILES['foto_wisata']['error'] === 4) {
+		// 	$foto_kategori = $gambarLama;
+		// }else {
+		// 	$foto_kategori  = upload();
+		// }
+
+		$queryw = mysqli_query($conn, "UPDATE wisata SET nama_wisata = '$nama_wisata', alamat_wisata = '$alamat_wisata',harga = '$harga' WHERE id_wisata = $id_wisata");
+
+		return mysqli_affected_rows($conn);
+	}
+
 	function deletek($id_kategori){
   	global $conn;
   	$deletek = mysqli_query($conn, "DELETE FROM kategori WHERE id_kategori = $id_kategori");
