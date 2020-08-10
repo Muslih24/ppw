@@ -1,5 +1,10 @@
 <?php
-require 'functions.php';
+session_start();
+require '../../functions.php';
+	
+if (!$_SESSION["hak_akses"]=="superadmin") {
+  header("Location:../../login.php");}
+
 
 if (isset ($_POST["submit"]) ) {
 	//cek keberhasilan
