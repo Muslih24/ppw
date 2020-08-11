@@ -8,7 +8,7 @@ if (!$_SESSION["hak_akses"]=="superadmin") {
 $id_wisata = $_GET["id_wisata"];
 
 $wisata = query("SELECT * FROM wisata WHERE id_wisata = $id_wisata")[0];
-$sql=mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id_kategori = wisata.id_kategori");
+$sql=mysqli_query($conn,"SELECT * FROM kategori");
 
 //cek submit
 if (isset ($_POST["submit"]) ) {
