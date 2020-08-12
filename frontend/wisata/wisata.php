@@ -80,7 +80,7 @@ $a = mysqli_query($conn,"SELECT * FROM wisata INNER JOIN kategori ON kategori.id
     </header>
     <div class="slide-one-item home-slider owl-carousel">
       <?php while ($rows = mysqli_fetch_array($a)) { ?>
-      <div class="site-blocks-cover overlay" style="background-image: url(../../assets/frontend/images/view_1.jpg);">
+        <div class="site-blocks-cover overlay" style="background-image: url('../../assets/img/images/kategori/<?= $rows['foto_kategori']?>');">
         <div class="container">
           <div class="row align-items-center justify-content-center text-center">
             <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">

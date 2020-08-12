@@ -178,7 +178,7 @@ Berdasarkan latar belakang masalah di atas  maka penyusun mengambil judul “Sev
           <center>
            <div class="col-md-6 col-lg-4 text-center mb-5" data-aos="fade-up">
             <img src="../assets/frontend/images/pp_bebek2.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4">
-            <h2 class="text-black font-weight-light mb-4">M Risky Ramdhani</h2>
+            <h2 class="text-black font-weight-light mb-4">Risky Ramdhani</h2>
             <p class="mb-4" style="margin-top: 10px;">NPM : 181106041111 <br> Kelas : Reguler - A <br> Email : Kikinxfals99@gmail.com </p>
             <p>
               <a href="#" class="pl-0 pr-3"><span class="icon-twitter"></span></a>

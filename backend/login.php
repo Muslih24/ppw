@@ -61,6 +61,7 @@ if (isset($_POST["login"]) ) {
 	<html>
 	<head>
 
+		<link rel="icon" type="image/png" href="../assets/img/logo/Logo7.png">
 		<title>::Login::</title>
 		<link rel="stylesheet" type="text/css" href="../assets/css/stylelogin.css">
 		<link rel="stylesheet" type="text/css" href="../assets/vendor/fontawesome/css/fontawesome.css">
